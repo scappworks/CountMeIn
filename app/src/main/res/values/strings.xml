@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">CountMeIn</string>
+    <string name="welcome">Welcome!</string>
+    <string name="running_count_formula_intro">Running Count formula:</string>
+    <string name="true_count_intro">True Count formula: Running Count / Remaining decks</string>4
+    <string name="true_count_example">Running count = 10 &amp; 5 decks remaining = the true count is 2</string>
+    <string name="players">Players</string>
+    <string name="decks">Decks</string>
+    <string name="play">Play</string>
+    <string name="app_focus">This app focuses on the Hi-Lo strategy of counting cards.
+    There are several different methods to card counting, but this method is the easiest to start learning.</string>
+    <string name="chances">Counting cards increases your chances of winning by 1 to 2 percent,
+    and is a fun brain exercise!</string>
+    <string name="happy_counting">Happy counting!</string>
+    <string name="hearts">Hearts</string>
+    <string name="spades">Spades</string>
+    <string name="clubs">Clubs</string>
+    <string name="diamonds">Diamonds</string>
+    <string name="running_count">Running count: </string>
+    <string name="true_count">True count: </string>
+    <string name="show_hand_totals">Show hand totals</string>
+    <string name="show_running_count">Show running count: </string>
+    <string name="show_true_count">Show true count: </string>
+    <string name="next_hand">Next hand</string>
+    <string name="submit">Submit</string>
+    <string-array name="running_count_formula">
+        <item>Start at 0</item>
+        <item>2–6 = +1</item>
+        <item>7–9 = 0</item>
+        <item>10-A = -1</item>
+    </string-array>
+    <string-array name="player_count_array">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="deck_count_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+</resources>
