@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         playButton.setOnClickListener {
+            val extras = Bundle()
+            val playerCountInt = playerCountSpinner.selectedItem.toString()
+            val deckCount = deckCountSpinner.selectedItem.toString()
+            extras.putString("playerCount", playerCountInt)
+            extras.putString("deckCount", deckCount)
+            gameIntent.putExtras(extras)
             startActivity(gameIntent)
         }
     }
