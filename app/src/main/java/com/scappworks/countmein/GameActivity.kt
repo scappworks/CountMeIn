@@ -13,23 +13,28 @@ class GameActivity : AppCompatActivity() {
         val extras = intent.extras
         val playerCount = extras!!.getString("playerCount")!!.toInt()
         val deckCount = extras.getString("deckCount")!!.toInt()
-        val shoe = createDeck()
+        val shoe = createDeck(deckCount)
+
+        Log.i("SHOE", shoe.toString())
+        Log.i("COUNT", shoe.count().toString())
     }
 
-    private fun createDeck(): List<Any> {
+    private fun createDeck(decks:Int): List<Any> {
         val suits = arrayOf("Hearts", "Spades", "Clubs", "Diamonds")
         val faceCards = arrayOf("King", "Queen", "Jack", "Ace")
         val builtDeck: MutableList<Any> = mutableListOf()
 
-        suits.forEach {
-            // Add all 2 - 10 cards per suit
-            for (i in 2..10) {
-                builtDeck.add("$i $it")
-            }
+        for(d in 1..decks) {
+            suits.forEach {
+                // Add all 2 - 10 cards per suit
+                for (i in 2..10) {
+                    builtDeck.add("$i $it")
+                }
 
-            // Add all face cards per suit
-            faceCards.forEach {fc ->
-                builtDeck.add("$fc $it")
+                // Add all face cards per suit
+                faceCards.forEach { fc ->
+                    builtDeck.add("$fc $it")
+                }
             }
         }
 
