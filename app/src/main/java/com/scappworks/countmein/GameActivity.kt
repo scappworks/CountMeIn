@@ -16,18 +16,24 @@ class GameActivity : AppCompatActivity() {
         val shoe:MutableList<Any> = createDeck()
 
         Log.d("DECK", shoe.toString())
+        Log.i("DECKCOUNT", shoe.count().toString())
     }
 
     private fun createDeck(): MutableList<Any> {
+        val suits = arrayOf("Hearts", "Spades", "Clubs", "Diamonds")
+        val faceCards = arrayOf("King", "Queen", "Jack", "Ace")
         val builtDeck: MutableList<Any> = arrayListOf()
-        for(i in 1..52) {
-            if (i == 1 || i == 11) {
-                builtDeck.add("A")
-            }
-            else if(i >= 10) {
-                builtDeck.add(i)
+
+        suits.forEach {
+            // Add all 2 - 10 cards per suit
+            for (i in 2..10) {
+                builtDeck.add("$i $it")
             }
 
+            // Add all face cards per suit
+            faceCards.forEach {fc ->
+                builtDeck.add("$fc $it")
+            }
         }
 
         return builtDeck
