@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.core.text.isDigitsOnly
 
 class GameActivity : AppCompatActivity() {
@@ -23,10 +24,10 @@ class GameActivity : AppCompatActivity() {
         var runningCount = 0
         var trueCount = runningCount / remainingDecks
         var playerHands = drawHands(playerCount, remainingShoe)
-        remainingCardCount = subtractShoe(playerCount, remainingCardCount)
 
-        Log.i("TEST", playerHands[0].firstCardNumber + playerHands[0].firstCardSuit)
-        Log.i("TEST", remainingShoe.count().toString())
+        playerHands.forEach {
+            Log.i("BIGTEST", it.firstCardNumber)
+        }
     }
 
     class PlayerHand(firstCard:String, secondCard:String) {
@@ -42,13 +43,17 @@ class GameActivity : AppCompatActivity() {
 
     private fun drawHands(playerCount:Int, shoe:List<String>): List<PlayerHand> {
         val hands = mutableListOf<PlayerHand>()
-        var tempShoe = shoe;
+        val tempShoe = shoe.toMutableList()
 
         for(i in 1..playerCount) {
             val hand = PlayerHand(tempShoe[0], tempShoe[1])
             hands.add(hand)
-            tempShoe = tempShoe.drop(0)
-            tempShoe = tempShoe.drop(0)
+            tempShoe.removeAt(0)
+            tempShoe.removeAt(0)
+        }
+
+        hands.forEach {
+            Log.i("TTTT", it.firstCardSuit)
         }
 
         return hands.toList()
