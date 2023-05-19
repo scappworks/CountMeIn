@@ -11,24 +11,47 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        // Choices from MainActivity
         val extras = intent.extras
         val playerCount = extras!!.getString("playerCount")!!.toInt()
         val deckCount = extras.getString("deckCount")!!.toInt()
-        val shoe:List<String> = createDeck(deckCount)
+        // Variables for this activity
+        var shoe:List<String> = createDeck(deckCount)
+        var remainingShoe = shoe
+        var remainingDecks = deckCount
+        var remainingCardCount = remainingShoe.count()
+        var runningCount = 0
+        var trueCount = runningCount / remainingDecks
+        var playerHands = drawHands(playerCount, remainingShoe)
+        remainingCardCount = subtractShoe(playerCount, remainingCardCount)
 
-
-        val test1 = PlayerHand(shoe[0], shoe[1])
-        val test2 = PlayerHand(shoe[2], shoe[3])
-
-        Log.i("TEST", test1.firstCardSuit + test1.secondCardSuit)
-        Log.i("TEST", test2.firstCardSuit + test2.secondCardSuit)
+        Log.i("TEST", playerHands[0].firstCardNumber + playerHands[0].firstCardSuit)
+        Log.i("TEST", remainingShoe.count().toString())
     }
 
     class PlayerHand(firstCard:String, secondCard:String) {
-        val firstCardNumber = firstCard.isDigitsOnly()
+        val firstCardNumber = firstCard.filter { it.isDigit() }
         val firstCardSuit = firstCard.filter { it.isLetter() }
-        val secondCardNumber = secondCard.isDigitsOnly()
+        val secondCardNumber = secondCard.filter { it.isDigit() }
         val secondCardSuit = secondCard.filter { it.isLetter() }
+    }
+
+    private fun subtractShoe(playerCount:Int, shoeCount:Int): Int {
+        return shoeCount - (playerCount * 2)
+    }
+
+    private fun drawHands(playerCount:Int, shoe:List<String>): List<PlayerHand> {
+        val hands = mutableListOf<PlayerHand>()
+        var tempShoe = shoe;
+
+        for(i in 1..playerCount) {
+            val hand = PlayerHand(tempShoe[0], tempShoe[1])
+            hands.add(hand)
+            tempShoe = tempShoe.drop(0)
+            tempShoe = tempShoe.drop(0)
+        }
+
+        return hands.toList()
     }
 
     private fun createDeck(deckCount:Int): List<String> {
