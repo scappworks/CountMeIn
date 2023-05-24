@@ -26,15 +26,14 @@ class GameActivity : AppCompatActivity() {
         var playerHands = drawHands(playerCount, remainingShoe)
 
         playerHands.forEach {
-            Log.i("BIGTEST", it.firstCardNumber)
+            Log.i("BIGTEST", it.firstCard)
+            Log.i("BIGTEST2", it.secondCard)
         }
     }
 
-    class PlayerHand(firstCard:String, secondCard:String) {
-        val firstCardNumber = firstCard.filter { it.isDigit() }
-        val firstCardSuit = firstCard.filter { it.isLetter() }
-        val secondCardNumber = secondCard.filter { it.isDigit() }
-        val secondCardSuit = secondCard.filter { it.isLetter() }
+    class PlayerHand(firstCardIn:String, secondCardIn:String) {
+        val firstCard = firstCardIn
+        val secondCard = secondCardIn
     }
 
     private fun subtractShoe(playerCount:Int, shoeCount:Int): Int {
@@ -50,10 +49,6 @@ class GameActivity : AppCompatActivity() {
             hands.add(hand)
             tempShoe.removeAt(0)
             tempShoe.removeAt(0)
-        }
-
-        hands.forEach {
-            Log.i("TTTT", it.firstCardSuit)
         }
 
         return hands.toList()
