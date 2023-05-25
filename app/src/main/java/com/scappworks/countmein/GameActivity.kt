@@ -17,8 +17,10 @@ class GameActivity : AppCompatActivity() {
         val playerCount = extras!!.getString("playerCount")!!.toInt()
         val deckCount = extras.getString("deckCount")!!.toInt()
 
+        Log.i("BEFORE", (deckCount * 52).toString())
         val gameVariables = GameVariables(playerCount, deckCount)
 
+        Log.i("AFTER", gameVariables.shoe.count().toString())
 
         gameVariables.playerHands.forEach {
             Log.i("TEST", it.firstCard)
