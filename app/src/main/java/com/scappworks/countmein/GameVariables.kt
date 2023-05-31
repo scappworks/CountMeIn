@@ -1,5 +1,7 @@
 package com.scappworks.countmein
 
+import android.util.Log
+
 data class GameVariables(val playerCount:Int, val deckCount:Int) {
     var shoe: List<String> = createDeck(deckCount)
     var remainingDecks = deckCount
@@ -11,6 +13,31 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
     class PlayerHand(firstCardIn: String, secondCardIn: String) {
         val firstCard = firstCardIn
         val secondCard = secondCardIn
+        // The amount that the hand will contribute to the total running count
+        var handCount = doHandCount(firstCard, secondCard)
+
+        // function for updating the count for an individual hand
+        private fun doHandCount(cardOne: String, cardTwo: String) : Int {
+            var currentCount = 0
+            val cardsArray = arrayOf(cardOne, cardTwo)
+            val minusArray = arrayOf("10", "Jack", "Queen", "King", "Ace")
+
+            cardsArray.forEach {
+                for (i in 2..6) {
+                    if (it.contains(i.toString())) {
+                        currentCount++
+                    }
+                }
+
+                minusArray.forEach { ten ->
+                    if (it.contains(ten)) {
+                        currentCount--
+                    }
+                }
+            }
+
+            return currentCount
+        }
     }
 
     private fun drawHands(playerCount: Int, shoe: List<String>): List<PlayerHand> {
