@@ -19,5 +19,7 @@ class GameActivity : AppCompatActivity() {
         val deckCount = extras.getString("deckCount")!!.toInt()
 
         val gameVariables = GameVariables(playerCount, deckCount)
+
+        gameVariables.updateRunningCount()
     }
 }

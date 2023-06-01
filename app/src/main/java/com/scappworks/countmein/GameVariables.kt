@@ -79,4 +79,10 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
 
         return builtDeck.shuffled()
     }
+
+    fun updateRunningCount() {
+        playerHands.forEach {
+            runningCount += it.handCount
+        }
+    }
 }
