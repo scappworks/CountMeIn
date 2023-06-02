@@ -8,7 +8,7 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
     var runningCount = 0
     var trueCount = runningCount / remainingDecks
     var playerHands = drawHands(playerCount, shoe)
-
+    var finished = false
 
     class PlayerHand(firstCardIn: String, secondCardIn: String) {
         val firstCard = firstCardIn
@@ -40,17 +40,32 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
         }
     }
 
+    // Public function to initiate drawing new hands
+    fun doDrawHands() {
+        playerHands = drawHands(playerCount, shoe)
+    }
+
+    // Logic for drawing hands
     private fun drawHands(playerCount: Int, shoe: List<String>): List<PlayerHand> {
         val hands = mutableListOf<PlayerHand>()
         val tempShoe = shoe.toMutableList()
         var cardsTaken = 0
+        val shoeFinished = tempShoe.isEmpty()
 
-        for (i in 1..playerCount) {
-            val hand = PlayerHand(tempShoe[0], tempShoe[1])
-            hands.add(hand)
-            tempShoe.removeAt(0)
-            tempShoe.removeAt(0)
-            cardsTaken += 2
+        if (!shoeFinished) {
+            for (i in 1..playerCount) {
+                if (tempShoe.count() > 1) {
+                    val hand = PlayerHand(tempShoe[0], tempShoe[1])
+                    hands.add(hand)
+                    tempShoe.removeAt(0)
+                    tempShoe.removeAt(0)
+                    cardsTaken += 2
+                }
+            }
+        }
+
+        if (shoeFinished && !this.finished){
+            this.finished = shoeFinished
         }
 
         this.shoe = tempShoe.toList()
@@ -84,5 +99,9 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
         playerHands.forEach {
             runningCount += it.handCount
         }
+    }
+
+    fun checkFinished(): Boolean {
+        return this.finished
     }
 }

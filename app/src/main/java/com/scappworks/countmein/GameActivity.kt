@@ -21,5 +21,22 @@ class GameActivity : AppCompatActivity() {
         val gameVariables = GameVariables(playerCount, deckCount)
 
         gameVariables.updateRunningCount()
+
+        Log.i("RC", gameVariables.runningCount.toString())
+        Log.i("SC", gameVariables.shoe.count().toString())
+
+        gameVariables.playerHands.forEach {
+            Log.i("C1", it.firstCard)
+            Log.i("C2", it.secondCard)
+        }
+
+        val b = findViewById<Button>(R.id.test_button)
+        b.setOnClickListener {
+            gameVariables.doDrawHands()
+            gameVariables.updateRunningCount()
+
+
+
+        }
     }
 }
