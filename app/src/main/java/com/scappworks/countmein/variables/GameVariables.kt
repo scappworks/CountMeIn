@@ -1,4 +1,4 @@
-package com.scappworks.countmein.activities
+package com.scappworks.countmein.variables
 
 data class GameVariables(val playerCount:Int, val deckCount:Int) {
     var shoe: List<String> = createDeck(deckCount)
