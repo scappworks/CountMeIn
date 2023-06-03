@@ -1,12 +1,10 @@
-package com.scappworks.countmein
+package com.scappworks.countmein.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import androidx.cardview.widget.CardView
-import androidx.core.text.isDigitsOnly
+import com.scappworks.countmein.R
 
 class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
