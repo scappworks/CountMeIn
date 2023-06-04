@@ -1,14 +1,11 @@
 package com.scappworks.countmein.variables
 
-import android.util.Log
-
 data class GameVariables(val playerCount:Int, val deckCount:Int) {
     var shoe: List<String> = createDeck(deckCount)
     var remainingDecks = deckCount
     var runningCount = 0
     var trueCount = runningCount / remainingDecks
     var playerHands = drawHands(playerCount, shoe)
-    var playerHandsArray = arrayOf("")
     var finished = false
 
     class PlayerHand(firstCardIn: String, secondCardIn: String) {
@@ -70,15 +67,6 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
         }
 
         this.shoe = tempShoe.toList()
-
-        hands.forEach {
-            val tempArray = playerHandsArray
-            playerHandsArray = tempArray + (it.firstCard + it.secondCard)
-
-            playerHandsArray.forEach {f ->
-                Log.i("TEST", f)
-            }
-        }
 
         return hands.toList()
     }
