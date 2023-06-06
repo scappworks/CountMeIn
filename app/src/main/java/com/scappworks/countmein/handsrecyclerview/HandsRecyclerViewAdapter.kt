@@ -1,4 +1,5 @@
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         val firstCardNumber: TextView
         val secondCardNumber: TextView
         val runningCount: TextView
+
         init {
             firstCardNumber = itemView.findViewById(R.id.first_card_number_view)
             secondCardNumber = itemView.findViewById(R.id.second_card_number_view)
