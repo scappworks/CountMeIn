@@ -1,14 +1,24 @@
 package com.scappworks.countmein.handsrecyclerview
 
-class HandsRecyclerViewModel (private var firstCard: String, private var secondCard: String, private var runningCount: Int) {
+class HandsRecyclerViewModel (
+    private var firstCardNumber: String, private var firstCardSuite: String,
+    private var secondCard: String, private var runningCount: Int) {
 
     // Getter and Setter
-    fun getFirstCard(): String {
-        return firstCard
+    fun getFirstCardNumber(): String {
+        return firstCardSuite
     }
 
-    fun setFirstCard(firstCard: String) {
-        this.firstCard = firstCard
+    fun getFirstCardSuite(): String {
+        return firstCardSuite
+    }
+
+    fun setFirstCardNumber(firstCardNumber: String) {
+        this.firstCardNumber = firstCardNumber
+    }
+
+    fun setFirstCardSuite(firstCardSuite: String) {
+        this.firstCardNumber = firstCardSuite
     }
 
     fun getSecondCard(): String {

@@ -38,6 +38,8 @@ class GameActivity : AppCompatActivity() {
             gameVariables.updateRunningCount()
         }
 
+        Log.i("TEST", gameVariables.playerHands[0].firstCard)
+
         val testRV = findViewById<RecyclerView>(R.id.player_hands_rv)
         val testList = gameVariables.playerHands
         val testAdapter = HandsAdapter(this, testList)
@@ -45,7 +47,5 @@ class GameActivity : AppCompatActivity() {
 
         testRV.adapter = testAdapter
         testRV.layoutManager = linearLayoutManager
-
-
     }
 }
