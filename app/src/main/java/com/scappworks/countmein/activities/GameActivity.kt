@@ -1,9 +1,12 @@
 package com.scappworks.countmein.activities
 
+import HandsAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
 import com.scappworks.countmein.variables.GameVariables
 
@@ -33,9 +36,16 @@ class GameActivity : AppCompatActivity() {
         b.setOnClickListener {
             gameVariables.doDrawHands()
             gameVariables.updateRunningCount()
-
-
-
         }
+
+        val testRV = findViewById<RecyclerView>(R.id.player_hands_rv)
+        val testList = gameVariables.playerHands
+        val testAdapter = HandsAdapter(this, testList)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        testRV.adapter = testAdapter
+        testRV.layoutManager = linearLayoutManager
+
+
     }
 }
