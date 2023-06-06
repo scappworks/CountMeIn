@@ -15,11 +15,23 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/test_button"
-        android:layout_width="match_parent"
+        android:id="@+id/show_hand_totals_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/player_hands_rv"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="testbutton"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/show_hand_totals" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_hand_button"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/show_hand_totals_button"
+        app:layout_constraintLeft_toRightOf="@+id/show_hand_totals_button"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/next_hand"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

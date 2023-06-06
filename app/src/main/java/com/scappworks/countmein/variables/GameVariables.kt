@@ -71,7 +71,6 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
         if (this.finished) {
             hands.clear()
             hands.add(PlayerHand("DONE", "DONE"))
-            Log.i("TEST", "run")
         }
 
         this.shoe = tempShoe.toList()

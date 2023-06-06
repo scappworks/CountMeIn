@@ -28,7 +28,7 @@ class GameActivity : AppCompatActivity() {
 
         gameVariables.updateRunningCount()
 
-        val b = findViewById<Button>(R.id.test_button)
+        val b = findViewById<Button>(R.id.next_hand_button)
         b.setOnClickListener {
             if (!gameVariables.checkFinished()) {
                 gameVariables.doDrawHands()
