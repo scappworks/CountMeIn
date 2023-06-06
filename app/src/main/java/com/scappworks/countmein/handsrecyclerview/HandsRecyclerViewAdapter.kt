@@ -2,11 +2,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
-import com.scappworks.countmein.handsrecyclerview.HandsRecyclerViewModel
 import com.scappworks.countmein.variables.GameVariables
 
 class HandsAdapter(private val context: Context, handsList: List<GameVariables.PlayerHand>) :
@@ -23,6 +21,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         val model: GameVariables.PlayerHand = handsModelList[position]
         holder.firstCardNumber.setText(model.firstCard)
         holder.secondCardNumber.setText(model.secondCard)
+        holder.runningCount.setText(model.handCount.toString())
     }
 
     override fun getItemCount(): Int {

@@ -21,8 +21,8 @@ class GameActivity : AppCompatActivity() {
         val deckCount = extras.getString("deckCount")!!.toInt()
         val gameVariables = GameVariables(playerCount, deckCount)
         val handsRV = findViewById<RecyclerView>(R.id.player_hands_rv)
-        val handsRvList = gameVariables.playerHands
-        val handsRvAdapter = HandsAdapter(this, handsRvList)
+        var handsRvList = gameVariables.playerHands
+        var handsRvAdapter = HandsAdapter(this, handsRvList)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         gameVariables.updateRunningCount()
@@ -31,7 +31,9 @@ class GameActivity : AppCompatActivity() {
         b.setOnClickListener {
             gameVariables.doDrawHands()
             gameVariables.updateRunningCount()
-
+            handsRvList = gameVariables.playerHands
+            handsRvAdapter = HandsAdapter(this, handsRvList)
+            handsRV.adapter = handsRvAdapter
         }
 
         handsRV.adapter = handsRvAdapter
