@@ -19,9 +19,9 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     override fun onBindViewHolder(holder: HandsAdapter.ViewHolder, position: Int) {
         // to set data to textview and imageview of each card layout
         val model: GameVariables.PlayerHand = handsModelList[position]
-        holder.firstCardNumber.setText(model.firstCard)
-        holder.secondCardNumber.setText(model.secondCard)
-        holder.runningCount.setText(model.handCount.toString())
+        holder.firstCardNumber.text = model.firstCard
+        holder.secondCardNumber.text = model.secondCard
+        holder.runningCount.text = model.handCount.toString()
     }
 
     override fun getItemCount(): Int {
