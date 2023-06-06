@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
@@ -29,11 +30,13 @@ class GameActivity : AppCompatActivity() {
 
         val b = findViewById<Button>(R.id.test_button)
         b.setOnClickListener {
-            gameVariables.doDrawHands()
-            gameVariables.updateRunningCount()
-            handsRvList = gameVariables.playerHands
-            handsRvAdapter = HandsAdapter(this, handsRvList)
-            handsRV.adapter = handsRvAdapter
+            if (!gameVariables.checkFinished()) {
+                gameVariables.doDrawHands()
+                gameVariables.updateRunningCount()
+                handsRvList = gameVariables.playerHands
+                handsRvAdapter = HandsAdapter(this, handsRvList)
+                handsRV.adapter = handsRvAdapter
+            }
         }
 
         handsRV.adapter = handsRvAdapter
