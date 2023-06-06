@@ -19,33 +19,22 @@ class GameActivity : AppCompatActivity() {
         val extras = intent.extras
         val playerCount = extras!!.getString("playerCount")!!.toInt()
         val deckCount = extras.getString("deckCount")!!.toInt()
-
         val gameVariables = GameVariables(playerCount, deckCount)
+        val handsRV = findViewById<RecyclerView>(R.id.player_hands_rv)
+        val handsRvList = gameVariables.playerHands
+        val handsRvAdapter = HandsAdapter(this, handsRvList)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         gameVariables.updateRunningCount()
-
-        Log.i("RC", gameVariables.runningCount.toString())
-        Log.i("SC", gameVariables.shoe.count().toString())
-
-        gameVariables.playerHands.forEach {
-            Log.i("C1", it.firstCard)
-            Log.i("C2", it.secondCard)
-        }
 
         val b = findViewById<Button>(R.id.test_button)
         b.setOnClickListener {
             gameVariables.doDrawHands()
             gameVariables.updateRunningCount()
+
         }
 
-        Log.i("TEST", gameVariables.playerHands[0].firstCard)
-
-        val testRV = findViewById<RecyclerView>(R.id.player_hands_rv)
-        val testList = gameVariables.playerHands
-        val testAdapter = HandsAdapter(this, testList)
-        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-        testRV.adapter = testAdapter
-        testRV.layoutManager = linearLayoutManager
+        handsRV.adapter = handsRvAdapter
+        handsRV.layoutManager = linearLayoutManager
     }
 }
