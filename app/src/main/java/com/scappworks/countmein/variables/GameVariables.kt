@@ -55,6 +55,8 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
         if (!shoeFinished) {
             for (i in 1..playerCount) {
                 if (tempShoe.count() > 1) {
+                    // Creates a new hand, adds it to the list,
+                    // and removes the 2 used cards from the shoe
                     val hand = PlayerHand(tempShoe[0], tempShoe[1])
                     hands.add(hand)
                     tempShoe.removeAt(0)
@@ -68,6 +70,7 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
             this.finished = shoeFinished
         }
 
+        // Prevent the overdrawing of hands at the end of the shoe
         if (this.finished) {
             hands.clear()
             hands.add(PlayerHand("DONE", "DONE"))

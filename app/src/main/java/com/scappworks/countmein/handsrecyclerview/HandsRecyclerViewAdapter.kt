@@ -20,12 +20,12 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     }
 
     override fun onBindViewHolder(holder: HandsAdapter.ViewHolder, position: Int) {
-        // to set data to textview and imageview of each card layout
         val model: GameVariables.PlayerHand = handsModelList[position]
         holder.firstCardNumber.text = model.firstCard
         holder.secondCardNumber.text = model.secondCard
         holder.runningCount.text = model.handCount.toString()
 
+        // Hides and reveals the total hand count
         if (revealed) {
             holder.runningCount.visibility = View.VISIBLE
         }
@@ -39,7 +39,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         return handsModelList.count()
     }
 
-    // View holder class for initializing of your views such as TextView and Imageview.
+    // View holder class for initializing of your views
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val firstCardNumber: TextView
         val secondCardNumber: TextView

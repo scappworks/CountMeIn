@@ -20,6 +20,7 @@ class GameActivity : AppCompatActivity() {
         val extras = intent.extras
         val playerCount = extras!!.getString("playerCount")!!.toInt()
         val deckCount = extras.getString("deckCount")!!.toInt()
+        // Variables for this activity
         val gameVariables = GameVariables(playerCount, deckCount)
         val handsRV = findViewById<RecyclerView>(R.id.player_hands_rv)
         var handsRvList = gameVariables.playerHands
@@ -27,7 +28,6 @@ class GameActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val nextHandButton = findViewById<Button>(R.id.next_hand_button)
         val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
-
 
         gameVariables.updateRunningCount()
 
@@ -41,12 +41,12 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        handsRV.adapter = handsRvAdapter
-        handsRV.layoutManager = linearLayoutManager
-
         showHandsTotalButton.setOnClickListener {
             handsRvAdapter.revealed = !handsRvAdapter.revealed
             handsRvAdapter.notifyDataSetChanged()
         }
+
+        handsRV.adapter = handsRvAdapter
+        handsRV.layoutManager = linearLayoutManager
     }
 }

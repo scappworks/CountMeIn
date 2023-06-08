@@ -3,6 +3,7 @@ package com.scappworks.countmein.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -19,16 +20,15 @@ class MainActivity : AppCompatActivity() {
         val playerCountList = resources.getStringArray(R.array.player_count_array).toList()
         val playerCounterAdapter = ArrayAdapter(this, R.layout.player_count, playerCountList)
         val playerCountSpinner = findViewById<Spinner>(R.id.player_spinner)
-        playerCountSpinner.adapter = playerCounterAdapter
-        playerCountSpinner.setSelection(0)
         val deckCountList = resources.getStringArray(R.array.deck_count_array)
         val deckCountAdapter = ArrayAdapter(this, R.layout.player_count, deckCountList)
         val deckCountSpinner = findViewById<Spinner>(R.id.deck_spinner)
-        deckCountSpinner.adapter = deckCountAdapter
-        deckCountSpinner.setSelection(deckCountList.size - 1)
         val playButton = findViewById<Button>(R.id.play_button)
         val gameIntent = Intent(this, GameActivity::class.java)
-
+        playerCountSpinner.adapter = playerCounterAdapter
+        playerCountSpinner.setSelection(0)
+        deckCountSpinner.adapter = deckCountAdapter
+        deckCountSpinner.setSelection(deckCountList.size - 1)
 
         runningCountFormulaArray.forEachIndexed {index, it ->
             if (index == 0) {
