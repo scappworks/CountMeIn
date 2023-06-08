@@ -25,11 +25,13 @@ class GameActivity : AppCompatActivity() {
         var handsRvList = gameVariables.playerHands
         var handsRvAdapter = HandsAdapter(this, handsRvList)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val nextHandButton = findViewById<Button>(R.id.next_hand_button)
+        val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
+
 
         gameVariables.updateRunningCount()
 
-        val b = findViewById<Button>(R.id.next_hand_button)
-        b.setOnClickListener {
+        nextHandButton.setOnClickListener {
             if (!gameVariables.checkFinished()) {
                 gameVariables.doDrawHands()
                 gameVariables.updateRunningCount()
@@ -41,5 +43,10 @@ class GameActivity : AppCompatActivity() {
 
         handsRV.adapter = handsRvAdapter
         handsRV.layoutManager = linearLayoutManager
+
+        showHandsTotalButton.setOnClickListener {
+            handsRvAdapter.revealed = !handsRvAdapter.revealed
+            handsRvAdapter.notifyDataSetChanged()
+        }
     }
 }

@@ -1,5 +1,6 @@
 import android.content.Context
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.scappworks.countmein.variables.GameVariables
 class HandsAdapter(private val context: Context, handsList: List<GameVariables.PlayerHand>) :
     RecyclerView.Adapter<HandsAdapter.ViewHolder>() {
     private val handsModelList: List<GameVariables.PlayerHand>
+    var revealed = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HandsAdapter.ViewHolder {
         // to inflate the layout for each item of recycler view.
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.hand_player, parent, false)
@@ -23,6 +25,13 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         holder.firstCardNumber.text = model.firstCard
         holder.secondCardNumber.text = model.secondCard
         holder.runningCount.text = model.handCount.toString()
+
+        if (revealed) {
+            holder.runningCount.visibility = View.VISIBLE
+        }
+        else {
+            holder.runningCount.visibility = View.INVISIBLE
+        }
     }
 
     override fun getItemCount(): Int {
