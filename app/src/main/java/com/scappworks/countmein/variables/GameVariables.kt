@@ -2,8 +2,9 @@ package com.scappworks.countmein.variables
 
 import android.util.Log
 
-data class GameVariables(val playerCount:Int, val deckCount:Int) {
+data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var shoe: List<String> = createDeck(deckCount)
+    val shoeCountOriginal = shoe.count()
     var remainingDecks = deckCount
     var runningCount = 0
     var trueCount = runningCount / remainingDecks
@@ -37,6 +38,30 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
             }
 
             return currentCount
+        }
+    }
+
+    private fun updateDeckCount() {
+        val deckBreakingPoints = mutableListOf<Int>()
+
+        // Creates "tiers" to check if the remaining amount of cards in the shoe are signaling
+         // that decks need to be removed so the true count can be correct
+        for (i in this.deckCount downTo  0) {
+            deckBreakingPoints.add(52 * i)
+        }
+
+        deckBreakingPoints.forEach {
+            if (deckBreakingPoints.indexOf(it) < deckBreakingPoints.count() - 1) {
+                if (this.shoeCountOriginal - (this.shoeCountOriginal - this.shoe.count()) < it) {
+                    if (this.shoeCountOriginal - (this.shoeCountOriginal - this.shoe.count()) >
+                        deckBreakingPoints[deckBreakingPoints.indexOf(it) + 1]) {
+
+                        if (this.remainingDecks != this.deckCount - deckBreakingPoints.indexOf(it)) {
+                            this.remainingDecks = this.deckCount - deckBreakingPoints.indexOf(it)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -77,6 +102,8 @@ data class GameVariables(val playerCount:Int, val deckCount:Int) {
         }
 
         this.shoe = tempShoe.toList()
+
+        updateDeckCount()
 
         return hands.toList()
     }
