@@ -34,7 +34,6 @@ class GameActivity : AppCompatActivity() {
         nextHandButton.setOnClickListener {
             if (!gameVariables.checkFinished()) {
                 gameVariables.doDrawHands()
-                gameVariables.updateRunningCount()
                 handsRvList = gameVariables.playerHands
                 handsRvAdapter = HandsAdapter(this, handsRvList)
                 handsRV.adapter = handsRvAdapter

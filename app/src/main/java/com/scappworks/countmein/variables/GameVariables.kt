@@ -68,6 +68,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     // Public function to initiate drawing new hands
     fun doDrawHands() {
         playerHands = drawHands(playerCount, shoe)
+        updateRunningCount()
     }
 
     // Logic for drawing hands
@@ -131,8 +132,8 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     }
 
     fun updateRunningCount() {
-        playerHands.forEach {
-            runningCount += it.handCount
+        this.playerHands.forEach {
+            this.runningCount += it.handCount
         }
     }
 
