@@ -121,6 +121,8 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
 
         updateDeckCount()
 
+        Log.i("TRUECOUNT", trueCount.toString())
+
         return hands.toList()
     }
 

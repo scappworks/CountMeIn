@@ -4,7 +4,10 @@ import HandsAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,8 +31,14 @@ class GameActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val nextHandButton = findViewById<Button>(R.id.next_hand_button)
         val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
+        val runningCountGuessEditText = findViewById<EditText>(R.id.running_count_guess)
+        val runningCountGuessButton = findViewById<Button>(R.id.running_count_guess_submit)
+        val trueCountGuessEditText = findViewById<EditText>(R.id.true_count_guess)
+        val trueCountGuessButton = findViewById<Button>(R.id.true_count_guess_submit)
+        val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
 
         gameVariables.doUpdateRunningCount()
+        setTotalViewText(showTotalsTextView, gameVariables)
 
         nextHandButton.setOnClickListener {
             if (!gameVariables.checkFinished()) {
@@ -37,15 +46,36 @@ class GameActivity : AppCompatActivity() {
                 handsRvList = gameVariables.playerHands
                 handsRvAdapter = HandsAdapter(this, handsRvList)
                 handsRV.adapter = handsRvAdapter
+                showTotalsTextView.visibility = View.INVISIBLE
+            }
+
+            else {
+                showTotalsTextView.visibility = View.VISIBLE
+                setTotalViewText(showTotalsTextView, gameVariables)
             }
         }
 
         showHandsTotalButton.setOnClickListener {
             handsRvAdapter.revealed = !handsRvAdapter.revealed
             handsRvAdapter.notifyDataSetChanged()
+
+            if (showTotalsTextView.visibility == View.VISIBLE) {
+                showTotalsTextView.visibility = View.INVISIBLE
+            }
+
+            else {
+                showTotalsTextView.visibility = View.VISIBLE
+            }
+
+            setTotalViewText(showTotalsTextView, gameVariables)
         }
 
         handsRV.adapter = handsRvAdapter
         handsRV.layoutManager = linearLayoutManager
+    }
+
+    private fun setTotalViewText(d: TextView, g: GameVariables) {
+        d.text = "Running total: " + g.runningCount.toString() +
+                "\n\nTrue Count: " + g.trueCount.toString()
     }
 }
