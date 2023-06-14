@@ -41,6 +41,27 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         }
     }
 
+    // Public function to initiate drawing new hands
+    fun doDrawHands() {
+        playerHands = drawHands(playerCount, shoe)
+        updateRunningCount()
+    }
+
+    // Public function to initiate updating the running count
+    fun doUpdateRunningCount() {
+        updateRunningCount()
+    }
+
+    // Public function to check if the shoe is finished
+    fun checkFinished(): Boolean {
+        return this.finished
+    }
+    private fun updateRunningCount() {
+        this.playerHands.forEach {
+            this.runningCount += it.handCount
+        }
+    }
+
     private fun updateDeckCount() {
         val deckBreakingPoints = mutableListOf<Int>()
 
@@ -63,12 +84,6 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
                 }
             }
         }
-    }
-
-    // Public function to initiate drawing new hands
-    fun doDrawHands() {
-        playerHands = drawHands(playerCount, shoe)
-        updateRunningCount()
     }
 
     // Logic for drawing hands
@@ -129,15 +144,5 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         }
 
         return builtDeck.shuffled()
-    }
-
-    fun updateRunningCount() {
-        this.playerHands.forEach {
-            this.runningCount += it.handCount
-        }
-    }
-
-    fun checkFinished(): Boolean {
-        return this.finished
     }
 }

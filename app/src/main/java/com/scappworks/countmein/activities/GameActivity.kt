@@ -29,7 +29,7 @@ class GameActivity : AppCompatActivity() {
         val nextHandButton = findViewById<Button>(R.id.next_hand_button)
         val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
 
-        gameVariables.updateRunningCount()
+        gameVariables.doUpdateRunningCount()
 
         nextHandButton.setOnClickListener {
             if (!gameVariables.checkFinished()) {
