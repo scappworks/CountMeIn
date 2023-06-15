@@ -60,6 +60,9 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         this.playerHands.forEach {
             this.runningCount += it.handCount
         }
+
+        // Update true count as the running count and remaining decks change
+       this.trueCount = this.runningCount / this.remainingDecks
     }
 
     private fun updateDeckCount() {
@@ -120,8 +123,6 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         this.shoe = tempShoe.toList()
 
         updateDeckCount()
-
-        Log.i("TRUECOUNT", trueCount.toString())
 
         return hands.toList()
     }
