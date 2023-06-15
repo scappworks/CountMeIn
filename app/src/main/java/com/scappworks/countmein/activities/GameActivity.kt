@@ -74,8 +74,10 @@ class GameActivity : AppCompatActivity() {
         handsRV.layoutManager = linearLayoutManager
     }
 
-    private fun setTotalViewText(d: TextView, g: GameVariables) {
-        d.text = "Running total: " + g.runningCount.toString() +
-                "\n\nTrue Count: " + g.trueCount.toString()
+    private fun setTotalViewText(tvTextView: TextView, gv: GameVariables) {
+        // Creates string using string resource with variables
+        val totalViewString = getString(R.string.running_and_true_count, gv.runningCount.toString(),
+            gv.trueCount.toString())
+        tvTextView.text = totalViewString
     }
 }

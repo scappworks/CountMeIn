@@ -23,6 +23,11 @@
     <string name="show_true_count">Show true count: </string>
     <string name="next_hand">Next hand</string>
     <string name="submit">Submit</string>
+    <string name="running_and_true_count">Running total: %1$s
+        \n
+        \n
+        True count: %2$s
+    </string>
     <string-array name="running_count_formula">
         <item>Start at 0</item>
         <item>2–6 = +1</item>
