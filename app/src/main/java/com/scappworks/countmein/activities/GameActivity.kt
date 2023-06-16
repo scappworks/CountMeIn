@@ -32,9 +32,7 @@ class GameActivity : AppCompatActivity() {
         val nextHandButton = findViewById<Button>(R.id.next_hand_button)
         val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
         val runningCountGuessEditText = findViewById<EditText>(R.id.running_count_guess)
-        val runningCountGuessButton = findViewById<Button>(R.id.running_count_guess_submit)
         val trueCountGuessEditText = findViewById<EditText>(R.id.true_count_guess)
-        val trueCountGuessButton = findViewById<Button>(R.id.true_count_guess_submit)
         val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
 
         gameVariables.doUpdateRunningCount()
@@ -47,6 +45,7 @@ class GameActivity : AppCompatActivity() {
                 handsRvAdapter = HandsAdapter(this, handsRvList)
                 handsRV.adapter = handsRvAdapter
                 showTotalsTextView.visibility = View.INVISIBLE
+                runningCountGuessEditText.text.clear()
             }
 
             else {
