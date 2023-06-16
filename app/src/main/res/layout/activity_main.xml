@@ -79,6 +79,7 @@
         android:layout_height="48dp"
         android:textAlignment="center"
         android:gravity="center"
+        android:background="@null"
         app:layout_constraintTop_toBottomOf="@+id/true_count_example"
         app:layout_constraintLeft_toRightOf="@id/players_text"
         app:layout_constraintRight_toRightOf="parent"
@@ -90,6 +91,7 @@
         android:layout_height="48dp"
         android:textAlignment="center"
         android:gravity="center"
+        android:background="@null"
         app:layout_constraintTop_toBottomOf="@+id/player_spinner"
         app:layout_constraintLeft_toLeftOf="@id/player_spinner"
         app:layout_constraintVertical_chainStyle="packed" />

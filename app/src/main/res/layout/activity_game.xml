@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Your guesses: "
+        android:text="@string/your_guesses"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/running_count_guess" />

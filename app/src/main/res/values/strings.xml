@@ -28,6 +28,7 @@
         \n
         True count: %2$s
     </string>
+    <string name="your_guesses">Your guesses:</string>
     <string-array name="running_count_formula">
         <item>Start at 0</item>
         <item>2–6 = +1</item>
