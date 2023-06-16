@@ -46,6 +46,11 @@ class GameActivity : AppCompatActivity() {
                 handsRV.adapter = handsRvAdapter
                 showTotalsTextView.visibility = View.INVISIBLE
                 runningCountGuessEditText.text.clear()
+
+                if (gameVariables.checkFinished()) {
+                    setTotalViewText(showTotalsTextView, gameVariables)
+                    showTotalsTextView.visibility = View.VISIBLE
+                }
             }
 
             else {
