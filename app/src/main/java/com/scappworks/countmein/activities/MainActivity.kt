@@ -8,12 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.view.WindowCompat
 import com.scappworks.countmein.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         val runningCountFormula = findViewById<TextView>(R.id.running_count_formula)
         val runningCountFormulaArray = resources.getStringArray(R.array.running_count_formula)

@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.GameActivity">
+    tools:context=".activities.GameActivity"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="12dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/player_hands_rv"
