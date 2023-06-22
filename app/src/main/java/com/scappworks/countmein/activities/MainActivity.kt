@@ -35,11 +35,8 @@ class MainActivity : AppCompatActivity() {
         runningCountFormulaArray.forEachIndexed {index, it ->
             if (index == 0) {
                 runningCountFormula.text = ""
-                runningCountFormula.append("\n" + it)
             }
-            else {
                 runningCountFormula.append("\n" + it)
-            }
         }
 
         playButton.setOnClickListener {
