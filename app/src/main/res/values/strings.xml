@@ -16,8 +16,8 @@
     <string name="spades">Spades</string>
     <string name="clubs">Clubs</string>
     <string name="diamonds">Diamonds</string>
-    <string name="running_count">Running count: </string>
-    <string name="true_count">True count: </string>
+    <string name="running_count">Running count</string>
+    <string name="true_count">True count</string>
     <string name="show_totals">Show totals</string>
     <string name="show_running_count">Show running count: </string>
     <string name="show_true_count">Show true count: </string>
