@@ -37,7 +37,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/player_hands_rv"
-        app:layout_constraintBottom_toTopOf="@+id/true_count_guess" />
+        app:layout_constraintBottom_toTopOf="@+id/true_count_guess"
+        android:autofillHints="Running Count: "
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/true_count_guess"
@@ -50,7 +52,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/running_count_guess"
-        app:layout_constraintBottom_toTopOf="@id/show_hand_totals_button" />
+        app:layout_constraintBottom_toTopOf="@id/show_hand_totals_button"
+        android:autofillHints="True Count: "
+        android:inputType="number"/>
 
     <Button
         android:id="@+id/show_hand_totals_button"
