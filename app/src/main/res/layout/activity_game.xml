@@ -68,7 +68,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="@string/show_totals"
-        android:backgroundTint="@color/button_background"/>
+        android:backgroundTint="@color/button_background"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/show_totals_box"
@@ -91,6 +92,7 @@
         app:layout_constraintLeft_toRightOf="@+id/show_hand_totals_button"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/next_hand"
-        android:backgroundTint="@color/button_background"/>
+        android:backgroundTint="@color/button_background"
+        android:textColor="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
