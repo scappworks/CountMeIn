@@ -134,57 +134,81 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         return hands.toList()
     }
 
-    fun updateHandImages(cardIn: String, cardImageArray: Array<String>) : String {
-        var found = false
+    private fun determineSuit(cardIn: String) : String {
         var suit = ""
-        var number = ""
-        var cardOut = ""
-
-        Log.i("IN", cardIn)
 
         if (cardIn.contains("sp", ignoreCase = true)) {
             suit = "spades"
-            number = cardIn.substring(0, cardIn.indexOf(" "))
         }
 
         if (cardIn.contains("di", ignoreCase = true)) {
             suit = "diamonds"
-            number = cardIn.substring(0, cardIn.indexOf(" "))
         }
 
         if (cardIn.contains("he", ignoreCase = true)) {
             suit = "hearts"
-            number = cardIn.substring(0, cardIn.indexOf(" "))
         }
 
         if (cardIn.contains("cl", ignoreCase = true)) {
             suit = "clubs"
+        }
+
+        return suit
+    }
+
+    private fun determineNumber(cardIn: String) : String {
+        var number = ""
+
+        if (cardIn.contains("sp", ignoreCase = true)) {
             number = cardIn.substring(0, cardIn.indexOf(" "))
         }
 
-        cardImageArray.forEach {
-            if (!found){
-                // Gets the suit of the card image that it is currently viewing.
-                // Creates the suit name from the file path using substring
-                val cardImageSuit = it.substring(it.indexOf("e/") + 2, it.indexOf("_"))
-                val cardImageNumber = it.substring(it.indexOf("_") + 1, it.indexOf("."))
-
-                Log.i("CARDSUIT", cardImageSuit + " " + suit)
-                Log.i("CARDNUMBER", cardImageNumber + " " + number)
-
-                if (cardImageSuit == suit.lowercase() && cardImageNumber == number.lowercase()) {
-                    found = true
-                    Log.i("FOUND", cardImageNumber + cardImageSuit)
-                    cardOut = cardImageSuit + "_" + cardImageNumber
-
-                }
-            }
+        if (cardIn.contains("di", ignoreCase = true)) {
+            number = cardIn.substring(0, cardIn.indexOf(" "))
         }
 
-        Log.i("CARDOUT", cardOut)
+        if (cardIn.contains("he", ignoreCase = true)) {
+            number = cardIn.substring(0, cardIn.indexOf(" "))
+        }
 
-        return cardOut
+        if (cardIn.contains("cl", ignoreCase = true)) {
+            number = cardIn.substring(0, cardIn.indexOf(" "))
+        }
+
+        return number
     }
+
+
+        fun updateHandImages(firstCard: String, secondCard: String, cardImageArray: Array<String>) : List<String> {
+            var foundFirst = false
+            var foundSecond = false
+            var firstCardsuit = determineSuit(firstCard)
+            var secondCardSuit = determineSuit(secondCard)
+            var firstCardNumber = determineNumber(firstCard)
+            var secondCardNumber = determineNumber(secondCard)
+            var cardsOut = mutableListOf<String>()
+
+            cardImageArray.forEach {
+                if (!foundFirst && !foundSecond) {
+                    // Gets the suit of the card image that it is currently viewing.
+                    // Creates the suit name from the file path using substring
+                    val cardImageSuit = it.substring(it.indexOf("e/") + 2, it.indexOf("_"))
+                    val cardImageNumber = it.substring(it.indexOf("_") + 1, it.indexOf("."))
+
+                    if (cardImageSuit == firstCardsuit.lowercase() && cardImageNumber == firstCardNumber.lowercase()) {
+                        foundFirst = true
+                        cardsOut.add(cardImageSuit + "_" + cardImageNumber)
+                    }
+
+                    if (cardImageSuit == secondCardSuit.lowercase() && cardImageNumber == secondCardNumber.lowercase()) {
+                        foundSecond = true
+                        cardsOut.add(cardImageSuit + "_" + cardImageNumber)
+                    }
+                }
+            }
+
+            return cardsOut.toList()
+        }
 
     private fun createDeck(deckCount: Int): List<String> {
         val suits = arrayOf("Hearts", "Spades", "Clubs", "Diamonds")

@@ -7,8 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
@@ -37,6 +37,13 @@ class GameActivity : AppCompatActivity() {
         val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
         val cardImageArray = resources.getStringArray(R.array.card_images)
 
+
+
+        val testImageView = findViewById<ImageView>(R.id.testimage)
+
+
+
+
         gameVariables.doUpdateRunningCount()
         setTotalViewText(showTotalsTextView, gameVariables)
 
@@ -62,10 +69,28 @@ class GameActivity : AppCompatActivity() {
         }
 
         gameVariables.playerHands.forEach {
-            val cardImagePath = gameVariables.updateHandImages(it.firstCard, cardImageArray)
+            val cardImages = gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
 
-            if (cardImageArray.contains(cardImagePath)) {
-                Log.i("YERSSS", cardImagePath)
+            cardImages.forEach {
+                var found = false
+
+                if (!found) {
+                    cardImageArray.forEach { image ->
+                        if (image.contains(it)) {
+                            val initialPath = image.substring(0, image.indexOf("e/") + 2) + image + ".png"
+                            Log.i("YERSSS", initialPath)
+
+                            val uri = "@drawable/" + it
+                            val imageResource = resources.getIdentifier(uri, null, packageName)
+                            testImageView.setImageResource(imageResource)
+                            found = true
+                        }
+                    }
+                }
+            }
+
+            cardImageArray.forEach {cardImage ->
+
             }
         }
 
