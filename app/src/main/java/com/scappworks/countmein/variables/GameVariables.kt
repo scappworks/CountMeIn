@@ -1,6 +1,8 @@
 package com.scappworks.countmein.variables
 
+import android.media.Image
 import android.util.Log
+import java.util.Locale
 
 data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var shoe: List<String> = createDeck(deckCount)
@@ -8,12 +10,17 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var remainingDecks = deckCount
     var runningCount = 0
     var trueCount = runningCount / remainingDecks
-    var playerHands = drawHands(playerCount, shoe)
+    var playerHands = drawHands(playerCount, shoe, cardImageArray = arrayOf())
     var finished = false
 
-    class PlayerHand(firstCardIn: String, secondCardIn: String) {
+    class PlayerHand(
+        firstCardIn: String, secondCardIn: String,
+        firstCardImageIn: Image?, secondCardImageIn: Image?
+    ) {
         val firstCard = firstCardIn
+        var firstcardImage = firstCardImageIn
         val secondCard = secondCardIn
+        var secondCardImage = secondCardImageIn
         // The amount that the hand will contribute to the total running count
         var handCount = doHandCount(firstCard, secondCard)
 
@@ -42,8 +49,8 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     }
 
     // Public function to initiate drawing new hands
-    fun doDrawHands() {
-        playerHands = drawHands(playerCount, shoe)
+    fun doDrawHands(cardImageArray: Array<String>) {
+        playerHands = drawHands(playerCount, shoe, cardImageArray)
         updateRunningCount()
     }
 
@@ -90,7 +97,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     }
 
     // Logic for drawing hands
-    private fun drawHands(playerCount: Int, shoe: List<String>): List<PlayerHand> {
+    private fun drawHands(playerCount: Int, shoe: List<String>, cardImageArray: Array<String>): List<PlayerHand> {
         val hands = mutableListOf<PlayerHand>()
         val tempShoe = shoe.toMutableList()
         var cardsTaken = 0
@@ -101,7 +108,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
                 if (tempShoe.count() > 1) {
                     // Creates a new hand, adds it to the list,
                     // and removes the 2 used cards from the shoe
-                    val hand = PlayerHand(tempShoe[0], tempShoe[1])
+                    val hand = PlayerHand(tempShoe[0], tempShoe[1], null, null)
                     hands.add(hand)
                     tempShoe.removeAt(0)
                     tempShoe.removeAt(0)
@@ -117,7 +124,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         // Prevent the overdrawing of hands at the end of the shoe
         if (this.finished) {
             hands.clear()
-            hands.add(PlayerHand("DONE", "DONE"))
+            hands.add(PlayerHand("DONE", "DONE", null, null))
         }
 
         this.shoe = tempShoe.toList()
@@ -125,6 +132,58 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         updateDeckCount()
 
         return hands.toList()
+    }
+
+    fun updateHandImages(cardIn: String, cardImageArray: Array<String>) : String {
+        var found = false
+        var suit = ""
+        var number = ""
+        var cardOut = ""
+
+        Log.i("IN", cardIn)
+
+        if (cardIn.contains("sp", ignoreCase = true)) {
+            suit = "spades"
+            number = cardIn.substring(0, cardIn.indexOf(" "))
+        }
+
+        if (cardIn.contains("di", ignoreCase = true)) {
+            suit = "diamonds"
+            number = cardIn.substring(0, cardIn.indexOf(" "))
+        }
+
+        if (cardIn.contains("he", ignoreCase = true)) {
+            suit = "hearts"
+            number = cardIn.substring(0, cardIn.indexOf(" "))
+        }
+
+        if (cardIn.contains("cl", ignoreCase = true)) {
+            suit = "clubs"
+            number = cardIn.substring(0, cardIn.indexOf(" "))
+        }
+
+        cardImageArray.forEach {
+            if (!found){
+                // Gets the suit of the card image that it is currently viewing.
+                // Creates the suit name from the file path using substring
+                val cardImageSuit = it.substring(it.indexOf("e/") + 2, it.indexOf("_"))
+                val cardImageNumber = it.substring(it.indexOf("_") + 1, it.indexOf("."))
+
+                Log.i("CARDSUIT", cardImageSuit + " " + suit)
+                Log.i("CARDNUMBER", cardImageNumber + " " + number)
+
+                if (cardImageSuit == suit.lowercase() && cardImageNumber == number.lowercase()) {
+                    found = true
+                    Log.i("FOUND", cardImageNumber + cardImageSuit)
+                    cardOut = cardImageSuit + "_" + cardImageNumber
+
+                }
+            }
+        }
+
+        Log.i("CARDOUT", cardOut)
+
+        return cardOut
     }
 
     private fun createDeck(deckCount: Int): List<String> {

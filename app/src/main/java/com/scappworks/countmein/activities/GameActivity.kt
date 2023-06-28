@@ -35,13 +35,14 @@ class GameActivity : AppCompatActivity() {
         val runningCountGuessEditText = findViewById<EditText>(R.id.running_count_guess)
         val trueCountGuessEditText = findViewById<EditText>(R.id.true_count_guess)
         val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
+        val cardImageArray = resources.getStringArray(R.array.card_images)
 
         gameVariables.doUpdateRunningCount()
         setTotalViewText(showTotalsTextView, gameVariables)
 
         nextHandButton.setOnClickListener {
             if (!gameVariables.checkFinished()) {
-                gameVariables.doDrawHands()
+                gameVariables.doDrawHands(cardImageArray)
                 handsRvList = gameVariables.playerHands
                 handsRvAdapter = HandsAdapter(this, handsRvList)
                 handsRV.adapter = handsRvAdapter
@@ -60,6 +61,14 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
+        gameVariables.playerHands.forEach {
+            val cardImagePath = gameVariables.updateHandImages(it.firstCard, cardImageArray)
+
+            if (cardImageArray.contains(cardImagePath)) {
+                Log.i("YERSSS", cardImagePath)
+            }
+        }
+
         showHandsTotalButton.setOnClickListener {
             handsRvAdapter.revealed = !handsRvAdapter.revealed
             handsRvAdapter.notifyDataSetChanged()
@@ -74,6 +83,8 @@ class GameActivity : AppCompatActivity() {
 
             setTotalViewText(showTotalsTextView, gameVariables)
         }
+
+        gameVariables.doDrawHands(cardImageArray)
 
         handsRV.adapter = handsRvAdapter
         handsRV.layoutManager = linearLayoutManager
