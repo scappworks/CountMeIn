@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/player_hand_view"
     android:layout_width="140dp"
     android:layout_height="150dp"
     app:strokeColor="@color/black"
@@ -13,6 +14,17 @@
         android:layout_height="match_parent"
         android:padding="5dp"
         android:background="@color/text_background">
+
+        <ImageView
+            android:id="@+id/testimage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/diamonds_ace"
+            android:background="@color/text_background"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/first_card_number_view" />
 
         <TextView
             android:id="@+id/first_card_number_view"

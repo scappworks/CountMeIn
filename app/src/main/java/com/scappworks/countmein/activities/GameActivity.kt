@@ -39,8 +39,6 @@ class GameActivity : AppCompatActivity() {
 
 
 
-        val testImageView = findViewById<ImageView>(R.id.testimage)
-
 
 
 
@@ -77,20 +75,16 @@ class GameActivity : AppCompatActivity() {
                 if (!found) {
                     cardImageArray.forEach { image ->
                         if (image.contains(it)) {
-                            val initialPath = image.substring(0, image.indexOf("e/") + 2) + image + ".png"
-                            Log.i("YERSSS", initialPath)
-
                             val uri = "@drawable/" + it
                             val imageResource = resources.getIdentifier(uri, null, packageName)
-                            testImageView.setImageResource(imageResource)
+                            handsRvAdapter.imageResource = imageResource
+
+
+                            //testImageView.setImageResource(imageResource)
                             found = true
                         }
                     }
                 }
-            }
-
-            cardImageArray.forEach {cardImage ->
-
             }
         }
 

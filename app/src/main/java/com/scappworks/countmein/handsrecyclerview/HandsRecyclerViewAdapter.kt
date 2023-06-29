@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
@@ -13,16 +14,19 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     RecyclerView.Adapter<HandsAdapter.ViewHolder>() {
     private val handsModelList: List<GameVariables.PlayerHand>
     var revealed = false
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HandsAdapter.ViewHolder {
+    var imageResource = -1
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // to inflate the layout for each item of recycler view.
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.hand_player, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: HandsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: GameVariables.PlayerHand = handsModelList[position]
         holder.firstCardNumber.text = model.firstCard
+        holder.firstCardImage.setImageResource(imageResource)
         holder.secondCardNumber.text = model.secondCard
+        holder.secondCardImage.setImageResource(imageResource)
         holder.runningCount.text = model.handCount.toString()
 
         // Hides and reveals the total hand count
@@ -42,12 +46,16 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     // View holder class for initializing of your views
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val firstCardNumber: TextView
+        val firstCardImage: ImageView
         val secondCardNumber: TextView
+        val secondCardImage: ImageView
         val runningCount: TextView
 
         init {
             firstCardNumber = itemView.findViewById(R.id.first_card_number_view)
+            firstCardImage = itemView.findViewById(R.id.testimage)
             secondCardNumber = itemView.findViewById(R.id.second_card_number_view)
+            secondCardImage = itemView.findViewById(R.id.testimage)
             runningCount = itemView.findViewById(R.id.running_count)
         }
     }
