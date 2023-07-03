@@ -14,7 +14,8 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     RecyclerView.Adapter<HandsAdapter.ViewHolder>() {
     private val handsModelList: List<GameVariables.PlayerHand>
     var revealed = false
-    var imageResource = -1
+    var firstImageResource = -1
+    var secondImageResource = -1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // to inflate the layout for each item of recycler view.
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.hand_player, parent, false)
@@ -24,9 +25,9 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: GameVariables.PlayerHand = handsModelList[position]
         holder.firstCardNumber.text = model.firstCard
-        holder.firstCardImage.setImageResource(imageResource)
+        holder.firstCardImage.setImageResource(this.firstImageResource)
         holder.secondCardNumber.text = model.secondCard
-        holder.secondCardImage.setImageResource(imageResource)
+        holder.secondCardImage.setImageResource(this.secondImageResource)
         holder.runningCount.text = model.handCount.toString()
 
         // Hides and reveals the total hand count

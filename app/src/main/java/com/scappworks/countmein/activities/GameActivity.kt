@@ -67,25 +67,24 @@ class GameActivity : AppCompatActivity() {
         }
 
         gameVariables.playerHands.forEach {
-            val cardImages = gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
+            val cardImagePaths = gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
+            val uriList = mutableListOf<Int>()
 
-            cardImages.forEach {
-                var found = false
+            cardImagePaths.forEach {
+                cardImageArray.forEach { image ->
+                        val uri = "@drawable/" + it
+                        var imageResource: Int
 
-                if (!found) {
-                    cardImageArray.forEach { image ->
-                        if (image.contains(it)) {
-                            val uri = "@drawable/" + it
-                            val imageResource = resources.getIdentifier(uri, null, packageName)
-                            handsRvAdapter.imageResource = imageResource
+                            imageResource = resources.getIdentifier(uri, null, packageName)
+                            uriList.add(imageResource)
 
-
-                            //testImageView.setImageResource(imageResource)
-                            found = true
-                        }
-                    }
+                            imageResource = resources.getIdentifier(uri, null, packageName)
+                    uriList.add(imageResource)
                 }
             }
+
+            handsRvAdapter.firstImageResource = uriList.first()
+            handsRvAdapter.secondImageResource = uriList.last()
         }
 
         showHandsTotalButton.setOnClickListener {

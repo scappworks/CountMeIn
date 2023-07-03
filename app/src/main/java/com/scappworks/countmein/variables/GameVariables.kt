@@ -182,30 +182,24 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         fun updateHandImages(firstCard: String, secondCard: String, cardImageArray: Array<String>) : List<String> {
             var foundFirst = false
             var foundSecond = false
-            var firstCardsuit = determineSuit(firstCard)
-            var secondCardSuit = determineSuit(secondCard)
-            var firstCardNumber = determineNumber(firstCard)
-            var secondCardNumber = determineNumber(secondCard)
-            var cardsOut = mutableListOf<String>()
+            val firstCardSuit = determineSuit(firstCard)
+            val secondCardSuit = determineSuit(secondCard)
+            val firstCardNumber = determineNumber(firstCard)
+            val secondCardNumber = determineNumber(secondCard)
+            val cardsOut = mutableListOf<String>()
 
             cardImageArray.forEach {
-                if (!foundFirst && !foundSecond) {
                     // Gets the suit of the card image that it is currently viewing.
                     // Creates the suit name from the file path using substring
                     val cardImageSuit = it.substring(it.indexOf("e/") + 2, it.indexOf("_"))
                     val cardImageNumber = it.substring(it.indexOf("_") + 1, it.indexOf("."))
 
-                    if (cardImageSuit == firstCardsuit.lowercase() && cardImageNumber == firstCardNumber.lowercase()) {
+                    if (cardImageSuit == firstCardSuit.lowercase() && cardImageNumber == firstCardNumber.lowercase() ||
+                        cardImageSuit == secondCardSuit.lowercase() && cardImageNumber == secondCardNumber.lowercase()) {
                         foundFirst = true
                         cardsOut.add(cardImageSuit + "_" + cardImageNumber)
                     }
-
-                    if (cardImageSuit == secondCardSuit.lowercase() && cardImageNumber == secondCardNumber.lowercase()) {
-                        foundSecond = true
-                        cardsOut.add(cardImageSuit + "_" + cardImageNumber)
-                    }
                 }
-            }
 
             return cardsOut.toList()
         }
