@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
@@ -70,21 +71,24 @@ class GameActivity : AppCompatActivity() {
             val cardImagePaths = gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
             val uriList = mutableListOf<Int>()
 
-            cardImagePaths.forEach {
+            cardImagePaths.forEach {path ->
+                val card = path.substring(path.indexOf("e/") + 2, path.indexOf(".p"))
+
                 cardImageArray.forEach { image ->
-                        val uri = "@drawable/" + it
-                        var imageResource: Int
+                    if (image.contains(card)) {
+                        val imageResource = resources.getIdentifier(card, "drawable", packageName)
+                        uriList.add(imageResource)
+                    }
+                }
 
-                            imageResource = resources.getIdentifier(uri, null, packageName)
-                            uriList.add(imageResource)
+                if (uriList.count() == 1) {
+                    it.firstcardImage = uriList[0]
+                }
 
-                            imageResource = resources.getIdentifier(uri, null, packageName)
-                    uriList.add(imageResource)
+                else {
+                    it.secondCardImage = uriList[1]
                 }
             }
-
-            handsRvAdapter.firstImageResource = uriList.first()
-            handsRvAdapter.secondImageResource = uriList.last()
         }
 
         showHandsTotalButton.setOnClickListener {

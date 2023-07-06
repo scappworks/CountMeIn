@@ -25,9 +25,9 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: GameVariables.PlayerHand = handsModelList[position]
         holder.firstCardNumber.text = model.firstCard
-        holder.firstCardImage.setImageResource(this.firstImageResource)
+//        holder.firstCardImage.setImageResource(this.firstImageResource)
         holder.secondCardNumber.text = model.secondCard
-        holder.secondCardImage.setImageResource(this.secondImageResource)
+//        holder.secondCardImage.setImageResource(this.secondImageResource)
         holder.runningCount.text = model.handCount.toString()
 
         // Hides and reveals the total hand count

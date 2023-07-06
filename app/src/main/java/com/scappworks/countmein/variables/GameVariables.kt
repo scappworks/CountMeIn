@@ -1,5 +1,6 @@
 package com.scappworks.countmein.variables
 
+import android.graphics.drawable.Drawable
 import android.media.Image
 import android.util.Log
 import java.util.Locale
@@ -15,7 +16,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
 
     class PlayerHand(
         firstCardIn: String, secondCardIn: String,
-        firstCardImageIn: Image?, secondCardImageIn: Image?
+        firstCardImageIn: Int?, secondCardImageIn: Int?
     ) {
         val firstCard = firstCardIn
         var firstcardImage = firstCardImageIn
@@ -159,45 +160,29 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     private fun determineNumber(cardIn: String) : String {
         var number = ""
 
-        if (cardIn.contains("sp", ignoreCase = true)) {
-            number = cardIn.substring(0, cardIn.indexOf(" "))
-        }
-
-        if (cardIn.contains("di", ignoreCase = true)) {
-            number = cardIn.substring(0, cardIn.indexOf(" "))
-        }
-
-        if (cardIn.contains("he", ignoreCase = true)) {
-            number = cardIn.substring(0, cardIn.indexOf(" "))
-        }
-
-        if (cardIn.contains("cl", ignoreCase = true)) {
-            number = cardIn.substring(0, cardIn.indexOf(" "))
-        }
+            number = cardIn.substring(cardIn.indexOf("_"))
 
         return number
     }
 
 
         fun updateHandImages(firstCard: String, secondCard: String, cardImageArray: Array<String>) : List<String> {
-            var foundFirst = false
-            var foundSecond = false
             val firstCardSuit = determineSuit(firstCard)
             val secondCardSuit = determineSuit(secondCard)
             val firstCardNumber = determineNumber(firstCard)
             val secondCardNumber = determineNumber(secondCard)
+
             val cardsOut = mutableListOf<String>()
 
             cardImageArray.forEach {
                     // Gets the suit of the card image that it is currently viewing.
                     // Creates the suit name from the file path using substring
-                    val cardImageSuit = it.substring(it.indexOf("e/") + 2, it.indexOf("_"))
-                    val cardImageNumber = it.substring(it.indexOf("_") + 1, it.indexOf("."))
+                    val cardImageSuit = it.substring(0, it.indexOf("_"))
+                    val cardImageNumber = it.substring(it.indexOf("_"))
 
-                    if (cardImageSuit == firstCardSuit.lowercase() && cardImageNumber == firstCardNumber.lowercase() ||
-                        cardImageSuit == secondCardSuit.lowercase() && cardImageNumber == secondCardNumber.lowercase()) {
-                        foundFirst = true
-                        cardsOut.add(cardImageSuit + "_" + cardImageNumber)
+                    if (cardImageSuit.contains(firstCardSuit) && cardImageNumber.contains(firstCardNumber) ||
+                        cardImageSuit.contains(secondCardSuit) && cardImageNumber.contains(secondCardNumber)) {
+                        cardsOut.add(cardImageSuit + cardImageNumber)
                     }
                 }
 
@@ -205,20 +190,20 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         }
 
     private fun createDeck(deckCount: Int): List<String> {
-        val suits = arrayOf("Hearts", "Spades", "Clubs", "Diamonds")
-        val faceCards = arrayOf("King", "Queen", "Jack", "Ace")
+        val suits = arrayOf("hearts", "spades", "clubs", "diamonds")
+        val faceCards = arrayOf("king", "queen", "jack", "ace")
         val builtDeck: MutableList<String> = mutableListOf()
 
         for (d in 1..deckCount) {
             suits.forEach {
                 // Add all 2 - 10 cards per suit
                 for (i in 2..10) {
-                    builtDeck.add("$i $it")
+                    builtDeck.add(it + "_" + i)
                 }
 
                 // Add all face cards per suit
                 faceCards.forEach { fc ->
-                    builtDeck.add("$fc $it")
+                    builtDeck.add(it + "_" + fc)
                 }
             }
         }
