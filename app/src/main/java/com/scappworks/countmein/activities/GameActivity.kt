@@ -82,8 +82,8 @@ class GameActivity : AppCompatActivity() {
                 }
             }
 
-            it.firstCardImage = uriList.first()
-            it.secondCardImage = uriList.last()
+                it.firstCardImage = uriList.first()
+                it.secondCardImage = uriList.last()
         }
 
         showHandsTotalButton.setOnClickListener {

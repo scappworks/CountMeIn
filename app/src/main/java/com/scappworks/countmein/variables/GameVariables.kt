@@ -15,13 +15,12 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var finished = false
 
     class PlayerHand(
-        firstCardIn: String, secondCardIn: String,
-        firstCardImageIn: Int, secondCardImageIn: Int
+        firstCardIn: String, secondCardIn: String
     ) {
         val firstCard = firstCardIn
-        var firstCardImage = firstCardImageIn
+        var firstCardImage = 0
         val secondCard = secondCardIn
-        var secondCardImage = secondCardImageIn
+        var secondCardImage = 0
         // The amount that the hand will contribute to the total running count
         var handCount = doHandCount(firstCard, secondCard)
 
@@ -109,7 +108,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
                 if (tempShoe.count() > 1) {
                     // Creates a new hand, adds it to the list,
                     // and removes the 2 used cards from the shoe
-                    val hand = PlayerHand(tempShoe[0], tempShoe[1], -1, -1)
+                    val hand = PlayerHand(tempShoe[0], tempShoe[1])
                     hands.add(hand)
                     tempShoe.removeAt(0)
                     tempShoe.removeAt(0)
@@ -125,7 +124,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         // Prevent the overdrawing of hands at the end of the shoe
         if (this.finished) {
             hands.clear()
-            hands.add(PlayerHand("DONE", "DONE", -1, -1))
+            hands.add(PlayerHand("DONE", "DONE"))
         }
 
         this.shoe = tempShoe.toList()
@@ -175,16 +174,32 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
             val cardsOut = mutableListOf<String>()
 
             cardImageArray.forEach {
-                    // Gets the suit of the card image that it is currently viewing.
-                    // Creates the suit name from the file path using substring
-                    val cardImageSuit = it.substring(0, it.indexOf("_"))
-                    val cardImageNumber = it.substring(it.indexOf("_"))
+                // Gets the suit of the card image that it is currently viewing.
+                // Creates the suit name from the file path using substring
+                val cardImageSuit = it.substring(0, it.indexOf("_"))
+                val cardImageNumber = it.substring(it.indexOf("_"))
 
-                    if (cardImageSuit.contains(firstCardSuit) && cardImageNumber.contains(firstCardNumber) ||
-                        cardImageSuit.contains(secondCardSuit) && cardImageNumber.contains(secondCardNumber)) {
+                if (cardImageSuit.contains(firstCardSuit) && cardImageNumber.contains(firstCardNumber)) {
+                    if (cardsOut.isEmpty()) {
                         cardsOut.add(cardImageSuit + cardImageNumber)
+                        Log.d("EMPTY1", "eeeee")
+                    }
+
+                    else {
+                        cardsOut.add(0, cardImageSuit + cardImageNumber)
+                        Log.d("FIRSTINSERT", "eeeee")
                     }
                 }
+
+                else if (cardImageSuit.contains(secondCardSuit) && cardImageNumber.contains(secondCardNumber)) {
+                    cardsOut.add(cardImageSuit + cardImageNumber)
+                    Log.d("SECONDINSERT", "eeeee")
+                    }
+            }
+
+            cardsOut.forEach {
+                Log.i("CARDSOUT", it)
+            }
 
             return cardsOut.toList()
         }

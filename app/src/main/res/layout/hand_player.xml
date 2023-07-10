@@ -26,6 +26,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/first_card_number_view" />
 
+        <ImageView
+            android:id="@+id/testimage2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/diamonds_ace"
+            android:background="@color/text_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/second_card_number_view" />
+
+
         <TextView
             android:id="@+id/first_card_number_view"
             android:layout_width="0dp"

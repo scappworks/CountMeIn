@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.content.Context
 import android.opengl.Visibility
 import android.util.Log
@@ -43,6 +44,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     }
 
     // View holder class for initializing of your views
+    @SuppressLint("CutPasteId")
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val firstCardNumber: TextView
         val firstCardImage: ImageView
