@@ -54,6 +54,7 @@ class GameActivity : AppCompatActivity() {
                 handsRV.adapter = handsRvAdapter
                 showTotalsTextView.visibility = View.INVISIBLE
                 runningCountGuessEditText.text.clear()
+                updateHandImages(gameVariables, cardImageArray)
 
                 if (gameVariables.checkFinished()) {
                     setTotalViewText(showTotalsTextView, gameVariables)
@@ -65,12 +66,9 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        gameVariables.playerHands.forEach {
-            val uriList = getHandImageUris(gameVariables, it.firstCard, it.secondCard, cardImageArray)
 
-            it.firstCardImage = uriList.first()
-            it.secondCardImage = uriList.last()
-        }
+        updateHandImages(gameVariables, cardImageArray)
+
 
         showHandsTotalButton.setOnClickListener {
             handsRvAdapter.revealed = !handsRvAdapter.revealed
@@ -91,23 +89,27 @@ class GameActivity : AppCompatActivity() {
         handsRV.layoutManager = linearLayoutManager
     }
 
-    private fun getHandImageUris(gameVariables: GameVariables, firstCard: String,
-        secondCard: String, cardImageArray: Array<String>) : List<Int> {
-        val cardImagePaths = gameVariables.updateHandImages(firstCard, secondCard, cardImageArray)
-        val uriList = mutableListOf<Int>()
+    private fun updateHandImages(gameVariables: GameVariables, cardImageArray: Array<String>) {
+        gameVariables.playerHands.forEach {
+            val cardImagePaths =
+                gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
+            val uriList = mutableListOf<Int>()
 
-        cardImagePaths.forEach { path ->
-            val card = path.substring(path.indexOf("e/") + 2, path.indexOf(".p"))
+            cardImagePaths.forEach { path ->
+                val card = path.substring(path.indexOf("e/") + 2, path.indexOf(".p"))
 
-            cardImageArray.forEach { image ->
-                if (image.contains(card)) {
-                    val imageResource = resources.getIdentifier(card, "drawable", packageName)
-                    uriList.add(imageResource)
+                cardImageArray.forEach { image ->
+                    if (image.contains(card)) {
+                        val imageResource = resources.getIdentifier(card, "drawable", packageName)
+                        uriList.add(imageResource)
+                    }
                 }
             }
-        }
 
-        return uriList
+            it.firstCardImage = uriList.first()
+            it.secondCardImage = uriList.last()
+
+        }
     }
 
     private fun setTotalViewText(tvTextView: TextView, gv: GameVariables) {
