@@ -16,7 +16,7 @@
         android:background="@color/text_background">
 
         <ImageView
-            android:id="@+id/testimage"
+            android:id="@+id/first_card_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/diamonds_ace"
@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@+id/first_card_number_view" />
 
         <ImageView
-            android:id="@+id/testimage2"
+            android:id="@+id/second_card_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/diamonds_ace"
