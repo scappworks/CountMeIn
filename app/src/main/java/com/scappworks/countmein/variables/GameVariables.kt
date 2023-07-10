@@ -1,9 +1,6 @@
 package com.scappworks.countmein.variables
 
-import android.graphics.drawable.Drawable
-import android.media.Image
 import android.util.Log
-import java.util.Locale
 
 data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var shoe: List<String> = createDeck(deckCount)
@@ -156,12 +153,8 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         return suit
     }
 
-    private fun determineNumber(cardIn: String) : String {
-        var number = ""
-
-            number = cardIn.substring(cardIn.indexOf("_"))
-
-        return number
+    private fun determineNumber(cardIn: String): String {
+        return cardIn.substring(cardIn.indexOf("_"))
     }
 
 
@@ -182,23 +175,16 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
                 if (cardImageSuit.contains(firstCardSuit) && cardImageNumber.contains(firstCardNumber)) {
                     if (cardsOut.isEmpty()) {
                         cardsOut.add(cardImageSuit + cardImageNumber)
-                        Log.d("EMPTY1", cardImageSuit + cardImageNumber)
                     }
 
                     else {
                         cardsOut.add(0, cardImageSuit + cardImageNumber)
-                        Log.d("FIRSTINSERT", cardImageSuit + cardImageNumber)
                     }
                 }
 
                 else if (cardImageSuit.contains(secondCardSuit) && cardImageNumber.contains(secondCardNumber)) {
                     cardsOut.add(cardImageSuit + cardImageNumber)
-                    Log.d("SECONDINSERT", cardImageSuit + cardImageNumber)
-                    }
-            }
-
-            cardsOut.forEach {
-                Log.i("CARDSOUT", it)
+                 }
             }
 
             return cardsOut.toList()
