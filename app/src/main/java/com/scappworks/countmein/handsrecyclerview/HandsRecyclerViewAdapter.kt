@@ -23,9 +23,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: GameVariables.PlayerHand = handsModelList[position]
-        holder.firstCardNumber.text = model.firstCard
         holder.firstCardImage.setImageResource(model.firstCardImage)
-        holder.secondCardNumber.text = model.secondCard
         holder.secondCardImage.setImageResource(model.secondCardImage)
         holder.runningCount.text = model.handCount.toString()
 
@@ -46,16 +44,12 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     // View holder class for initializing of your views
     @SuppressLint("CutPasteId")
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val firstCardNumber: TextView
         val firstCardImage: ImageView
-        val secondCardNumber: TextView
         val secondCardImage: ImageView
         val runningCount: TextView
 
         init {
-            firstCardNumber = itemView.findViewById(R.id.first_card_number_view)
             firstCardImage = itemView.findViewById(R.id.first_card_image)
-            secondCardNumber = itemView.findViewById(R.id.second_card_number_view)
             secondCardImage = itemView.findViewById(R.id.second_card_image)
             runningCount = itemView.findViewById(R.id.running_count)
         }

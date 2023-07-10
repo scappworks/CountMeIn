@@ -24,7 +24,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/divider"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/first_card_number_view" />
+            app:layout_constraintBottom_toBottomOf="@+id/divider"
+            android:contentDescription="@string/first_card_image" />
 
         <ImageView
             android:id="@+id/second_card_image"
@@ -35,38 +36,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/divider"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/second_card_number_view" />
-
-
-        <TextView
-            android:id="@+id/first_card_number_view"
-            android:layout_width="0dp"
-            android:maxWidth="20dp"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder"
-            android:textSize="13sp"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/divider"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/divider"
-            android:background="@color/text_background"/>
-
-        <TextView
-            android:id="@+id/second_card_number_view"
-            android:layout_width="0dp"
-            android:maxWidth="20dp"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder"
-            android:textSize="13sp"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
-            app:layout_constraintLeft_toRightOf="@id/divider"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/divider"
-            android:background="@color/text_background"/>
+            android:contentDescription="@string/second_card_image" />
 
         <TextView
             android:id="@+id/divider"

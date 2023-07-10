@@ -25,7 +25,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         private fun doHandCount(cardOne: String, cardTwo: String) : Int {
             var currentCount = 0
             val cardsArray = arrayOf(cardOne, cardTwo)
-            val minusArray = arrayOf("10", "Jack", "Queen", "King", "Ace")
+            val minusArray = arrayOf("10", "jack", "queen", "king", "ace")
 
             cardsArray.forEach {
                 for (i in 2..6) {
@@ -36,6 +36,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
 
                 minusArray.forEach { ten ->
                     if (it.contains(ten)) {
+                        Log.i("YAR", ten)
                         currentCount--
                     }
                 }
