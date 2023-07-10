@@ -56,7 +56,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
             firstCardNumber = itemView.findViewById(R.id.first_card_number_view)
             firstCardImage = itemView.findViewById(R.id.testimage)
             secondCardNumber = itemView.findViewById(R.id.second_card_number_view)
-            secondCardImage = itemView.findViewById(R.id.testimage)
+            secondCardImage = itemView.findViewById(R.id.testimage2)
             runningCount = itemView.findViewById(R.id.running_count)
         }
     }

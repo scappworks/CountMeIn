@@ -182,18 +182,18 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
                 if (cardImageSuit.contains(firstCardSuit) && cardImageNumber.contains(firstCardNumber)) {
                     if (cardsOut.isEmpty()) {
                         cardsOut.add(cardImageSuit + cardImageNumber)
-                        Log.d("EMPTY1", "eeeee")
+                        Log.d("EMPTY1", cardImageSuit + cardImageNumber)
                     }
 
                     else {
                         cardsOut.add(0, cardImageSuit + cardImageNumber)
-                        Log.d("FIRSTINSERT", "eeeee")
+                        Log.d("FIRSTINSERT", cardImageSuit + cardImageNumber)
                     }
                 }
 
                 else if (cardImageSuit.contains(secondCardSuit) && cardImageNumber.contains(secondCardNumber)) {
                     cardsOut.add(cardImageSuit + cardImageNumber)
-                    Log.d("SECONDINSERT", "eeeee")
+                    Log.d("SECONDINSERT", cardImageSuit + cardImageNumber)
                     }
             }
 
