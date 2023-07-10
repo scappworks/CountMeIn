@@ -71,7 +71,7 @@ class GameActivity : AppCompatActivity() {
             val cardImagePaths = gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
             val uriList = mutableListOf<Int>()
 
-            cardImagePaths.forEach {path ->
+            cardImagePaths.forEach { path ->
                 val card = path.substring(path.indexOf("e/") + 2, path.indexOf(".p"))
 
                 cardImageArray.forEach { image ->
@@ -80,15 +80,10 @@ class GameActivity : AppCompatActivity() {
                         uriList.add(imageResource)
                     }
                 }
-
-                if (uriList.count() == 1) {
-                    it.firstcardImage = uriList[0]
-                }
-
-                else {
-                    it.secondCardImage = uriList[1]
-                }
             }
+
+            it.firstCardImage = uriList.first()
+            it.secondCardImage = uriList.last()
         }
 
         showHandsTotalButton.setOnClickListener {

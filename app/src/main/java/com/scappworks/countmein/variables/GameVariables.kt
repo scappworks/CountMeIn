@@ -16,10 +16,10 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
 
     class PlayerHand(
         firstCardIn: String, secondCardIn: String,
-        firstCardImageIn: Int?, secondCardImageIn: Int?
+        firstCardImageIn: Int, secondCardImageIn: Int
     ) {
         val firstCard = firstCardIn
-        var firstcardImage = firstCardImageIn
+        var firstCardImage = firstCardImageIn
         val secondCard = secondCardIn
         var secondCardImage = secondCardImageIn
         // The amount that the hand will contribute to the total running count
@@ -109,7 +109,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
                 if (tempShoe.count() > 1) {
                     // Creates a new hand, adds it to the list,
                     // and removes the 2 used cards from the shoe
-                    val hand = PlayerHand(tempShoe[0], tempShoe[1], null, null)
+                    val hand = PlayerHand(tempShoe[0], tempShoe[1], -1, -1)
                     hands.add(hand)
                     tempShoe.removeAt(0)
                     tempShoe.removeAt(0)
@@ -125,7 +125,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         // Prevent the overdrawing of hands at the end of the shoe
         if (this.finished) {
             hands.clear()
-            hands.add(PlayerHand("DONE", "DONE", null, null))
+            hands.add(PlayerHand("DONE", "DONE", -1, -1))
         }
 
         this.shoe = tempShoe.toList()
