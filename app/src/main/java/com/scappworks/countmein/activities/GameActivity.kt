@@ -38,11 +38,6 @@ class GameActivity : AppCompatActivity() {
         val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
         val cardImageArray = resources.getStringArray(R.array.card_images)
 
-
-
-
-
-
         gameVariables.doUpdateRunningCount()
         setTotalViewText(showTotalsTextView, gameVariables)
 
@@ -56,33 +51,42 @@ class GameActivity : AppCompatActivity() {
                 runningCountGuessEditText.text.clear()
                 updateHandImages(gameVariables, cardImageArray)
 
+                // This is used to detect if the deck is finished before all the hands
+                // have been dealt. It is to push the final state of finished without
+                // having to push any more buttons, and display promptly
                 if (gameVariables.checkFinished()) {
                     setTotalViewText(showTotalsTextView, gameVariables)
                     showTotalsTextView.visibility = View.VISIBLE
+                    handsRvAdapter.revealed = true
                 }
-            } else {
+            }
+
+            else {
                 showTotalsTextView.visibility = View.VISIBLE
+                handsRvAdapter.revealed = true
                 setTotalViewText(showTotalsTextView, gameVariables)
             }
         }
 
-
-        updateHandImages(gameVariables, cardImageArray)
-
-
         showHandsTotalButton.setOnClickListener {
-            handsRvAdapter.revealed = !handsRvAdapter.revealed
             handsRvAdapter.notifyDataSetChanged()
 
-            if (showTotalsTextView.visibility == View.VISIBLE) {
-                showTotalsTextView.visibility = View.INVISIBLE
-            } else {
-                showTotalsTextView.visibility = View.VISIBLE
-            }
+            if (!gameVariables.checkFinished()) {
+                if (showTotalsTextView.visibility == View.VISIBLE) {
+                    showTotalsTextView.visibility = View.INVISIBLE
+                    handsRvAdapter.revealed = false
+                }
 
-            setTotalViewText(showTotalsTextView, gameVariables)
+                else {
+                    showTotalsTextView.visibility = View.VISIBLE
+                    handsRvAdapter.revealed = true
+                }
+
+                setTotalViewText(showTotalsTextView, gameVariables)
+            }
         }
 
+        updateHandImages(gameVariables, cardImageArray)
         gameVariables.doDrawHands(cardImageArray)
 
         handsRV.adapter = handsRvAdapter
@@ -90,25 +94,28 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun updateHandImages(gameVariables: GameVariables, cardImageArray: Array<String>) {
-        gameVariables.playerHands.forEach {
-            val cardImagePaths =
-                gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
-            val uriList = mutableListOf<Int>()
+        if (!gameVariables.checkFinished()) {
+            gameVariables.playerHands.forEach {
+                val cardImagePaths =
+                    gameVariables.updateHandImages(it.firstCard, it.secondCard, cardImageArray)
+                val uriList = mutableListOf<Int>()
 
-            cardImagePaths.forEach { path ->
-                val card = path.substring(path.indexOf("e/") + 2, path.indexOf(".p"))
+                cardImagePaths.forEach { path ->
+                    val card = path.substring(path.indexOf("e/") + 2, path.indexOf(".p"))
 
-                cardImageArray.forEach { image ->
-                    if (image.contains(card)) {
-                        val imageResource = resources.getIdentifier(card, "drawable", packageName)
-                        uriList.add(imageResource)
+                    cardImageArray.forEach { image ->
+                        if (image.contains(card)) {
+                            val imageResource =
+                                resources.getIdentifier(card, "drawable", packageName)
+                            uriList.add(imageResource)
+                        }
                     }
                 }
+
+                it.firstCardImage = uriList.first()
+                it.secondCardImage = uriList.last()
+
             }
-
-            it.firstCardImage = uriList.first()
-            it.secondCardImage = uriList.last()
-
         }
     }
 
