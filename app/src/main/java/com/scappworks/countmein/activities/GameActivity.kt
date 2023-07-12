@@ -29,7 +29,7 @@ class GameActivity : AppCompatActivity() {
         val gameVariables = GameVariables(playerCount, deckCount)
         val handsRV = findViewById<RecyclerView>(R.id.player_hands_rv)
         var handsRvList = gameVariables.playerHands
-        var handsRvAdapter = HandsAdapter(this, handsRvList)
+        var handsRvAdapter = HandsAdapter(this, handsRvList, gameVariables)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val nextHandButton = findViewById<Button>(R.id.next_hand_button)
         val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
@@ -45,11 +45,14 @@ class GameActivity : AppCompatActivity() {
             if (!gameVariables.checkFinished()) {
                 gameVariables.doDrawHands(cardImageArray)
                 handsRvList = gameVariables.playerHands
-                handsRvAdapter = HandsAdapter(this, handsRvList)
+                handsRvAdapter = HandsAdapter(this, handsRvList, gameVariables)
                 handsRV.adapter = handsRvAdapter
                 showTotalsTextView.visibility = View.INVISIBLE
                 runningCountGuessEditText.text.clear()
                 updateHandImages(gameVariables, cardImageArray)
+                // This allows the color to change for the new hand
+                gameVariables.changeColor = true
+                gameVariables.changeColor = false
 
                 // This is used to detect if the deck is finished before all the hands
                 // have been dealt. It is to push the final state of finished without

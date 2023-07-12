@@ -10,6 +10,7 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var trueCount = runningCount / remainingDecks
     var playerHands = drawHands(playerCount, shoe, cardImageArray = arrayOf())
     var finished = false
+    var changeColor = false
 
     class PlayerHand(
         firstCardIn: String, secondCardIn: String

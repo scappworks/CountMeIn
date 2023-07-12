@@ -14,10 +14,12 @@ import com.scappworks.countmein.R
 import com.scappworks.countmein.variables.GameVariables
 import kotlin.random.Random
 
-class HandsAdapter(private val context: Context, handsList: List<GameVariables.PlayerHand>) :
+class HandsAdapter(private val context: Context, handsList: List<GameVariables.PlayerHand>, gameVariables: GameVariables) :
     RecyclerView.Adapter<HandsAdapter.ViewHolder>() {
     private val handsModelList: List<GameVariables.PlayerHand>
     var revealed = false
+    var changeColor = gameVariables.changeColor
+    var startingColors = true
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // to inflate the layout for each item of recycler view.
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.hand_player, parent, false)
@@ -29,7 +31,19 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         holder.firstCardImage.setImageResource(model.firstCardImage)
         holder.secondCardImage.setImageResource(model.secondCardImage)
         holder.runningCount.text = model.handCount.toString()
-        changeBackgroundColor(itemCount, holder.layout)
+
+        if (changeColor || startingColors) {
+            if (startingColors) {
+                if (position == itemCount - 1) {
+                    startingColors = false
+                }
+            }
+
+            Log.i("fffffffffff", changeColor.toString())
+
+            changeBackgroundColor(itemCount, holder.layout)
+            this.changeColor = false
+        }
 
         // Hides and reveals the total hand count
         if (revealed) {
@@ -67,8 +81,6 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     }
 
     private fun changeBackgroundColor(count: Int, layout: ConstraintLayout) {
-        val color = Color.argb(255, Random.nextInt(256),Random.nextInt(256),Random.nextInt(256))
-
-        layout.setBackgroundColor(color)
+        layout.setBackgroundColor(Color.argb(255, Random.nextInt(256),Random.nextInt(256),Random.nextInt(256)))
     }
 }
