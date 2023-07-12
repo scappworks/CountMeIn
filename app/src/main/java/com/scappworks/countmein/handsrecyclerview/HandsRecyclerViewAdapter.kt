@@ -1,5 +1,6 @@
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
 import com.scappworks.countmein.variables.GameVariables
+import kotlin.random.Random
 
 class HandsAdapter(private val context: Context, handsList: List<GameVariables.PlayerHand>) :
     RecyclerView.Adapter<HandsAdapter.ViewHolder>() {
@@ -26,6 +29,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         holder.firstCardImage.setImageResource(model.firstCardImage)
         holder.secondCardImage.setImageResource(model.secondCardImage)
         holder.runningCount.text = model.handCount.toString()
+        changeBackgroundColor(itemCount, holder.layout)
 
         // Hides and reveals the total hand count
         if (revealed) {
@@ -47,16 +51,24 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         val firstCardImage: ImageView
         val secondCardImage: ImageView
         val runningCount: TextView
+        val layout: ConstraintLayout
 
         init {
             firstCardImage = itemView.findViewById(R.id.first_card_image)
             secondCardImage = itemView.findViewById(R.id.second_card_image)
             runningCount = itemView.findViewById(R.id.running_count)
+            layout = itemView.findViewById(R.id.player_hand_container)
         }
     }
 
     // Constructor
     init {
         this.handsModelList = handsList
+    }
+
+    private fun changeBackgroundColor(count: Int, layout: ConstraintLayout) {
+        val color = Color.argb(255, Random.nextInt(256),Random.nextInt(256),Random.nextInt(256))
+
+        layout.setBackgroundColor(color)
     }
 }
