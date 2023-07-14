@@ -50,9 +50,8 @@ class GameActivity : AppCompatActivity() {
                 showTotalsTextView.visibility = View.INVISIBLE
                 runningCountGuessEditText.text.clear()
                 updateHandImages(gameVariables, cardImageArray)
-                // This allows the color to change for the new hand
-                gameVariables.changeColor = true
-                gameVariables.changeColor = false
+
+                gameVariables.setColors(-1)
 
                 // This is used to detect if the deck is finished before all the hands
                 // have been dealt. It is to push the final state of finished without
@@ -72,7 +71,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         showHandsTotalButton.setOnClickListener {
-            handsRvAdapter.notifyDataSetChanged()
+            handsRvAdapter.notifyItemRangeChanged(0, handsRvAdapter.itemCount)
 
             if (!gameVariables.checkFinished()) {
                 if (showTotalsTextView.visibility == View.VISIBLE) {

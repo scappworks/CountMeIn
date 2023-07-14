@@ -18,12 +18,13 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     RecyclerView.Adapter<HandsAdapter.ViewHolder>() {
     private val handsModelList: List<GameVariables.PlayerHand>
     var revealed = false
-    var changeColor = gameVariables.changeColor
-    var startingColors = true
+    var colorset = gameVariables.colorSet
+    val gv = gameVariables
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // to inflate the layout for each item of recycler view.
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.hand_player, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, this.gv)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,17 +33,26 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         holder.secondCardImage.setImageResource(model.secondCardImage)
         holder.runningCount.text = model.handCount.toString()
 
-        if (changeColor || startingColors) {
-            if (startingColors) {
-                if (position == itemCount - 1) {
-                    startingColors = false
-                }
+        if (!colorset) {
+            val color = Color.argb(
+                255,
+                Random.nextInt(256),
+                Random.nextInt(256),
+                Random.nextInt(256)
+            )
+
+            holder.layout.setBackgroundColor(color)
+
+            this.gv.setColors(color)
+
+            if (position == itemCount - 1) {
+                Log.i("YER", "YAR")
+                this.colorset = true
             }
+        }
 
-            Log.i("fffffffffff", changeColor.toString())
-
-            changeBackgroundColor(itemCount, holder.layout)
-            this.changeColor = false
+        else {
+            holder.layout.setBackgroundColor(gv.colors[position])
         }
 
         // Hides and reveals the total hand count
@@ -61,7 +71,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
 
     // View holder class for initializing of your views
     @SuppressLint("CutPasteId")
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, gameVariables: GameVariables) : RecyclerView.ViewHolder(itemView) {
         val firstCardImage: ImageView
         val secondCardImage: ImageView
         val runningCount: TextView
@@ -78,9 +88,5 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
     // Constructor
     init {
         this.handsModelList = handsList
-    }
-
-    private fun changeBackgroundColor(count: Int, layout: ConstraintLayout) {
-        layout.setBackgroundColor(Color.argb(255, Random.nextInt(256),Random.nextInt(256),Random.nextInt(256)))
     }
 }

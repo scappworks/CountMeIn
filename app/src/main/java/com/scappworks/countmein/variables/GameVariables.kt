@@ -10,7 +10,8 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
     var trueCount = runningCount / remainingDecks
     var playerHands = drawHands(playerCount, shoe, cardImageArray = arrayOf())
     var finished = false
-    var changeColor = false
+    var colorSet = false
+    val colors = mutableListOf<Int>()
 
     class PlayerHand(
         firstCardIn: String, secondCardIn: String
@@ -37,13 +38,23 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
 
                 minusArray.forEach { ten ->
                     if (it.contains(ten)) {
-                        Log.i("YAR", ten)
                         currentCount--
                     }
                 }
             }
 
             return currentCount
+        }
+    }
+
+    fun setColors(color: Int) {
+        if (color == -1) {
+            colors.clear()
+            colorSet = false
+        }
+
+        else {
+            colors.add(color)
         }
     }
 
