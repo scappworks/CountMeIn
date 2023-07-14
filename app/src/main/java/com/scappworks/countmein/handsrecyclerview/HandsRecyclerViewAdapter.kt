@@ -46,7 +46,6 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
             this.gv.setColors(color)
 
             if (position == itemCount - 1) {
-                Log.i("YER", "YAR")
                 this.colorset = true
             }
         }

@@ -49,8 +49,6 @@ class GameActivity : AppCompatActivity() {
                 handsRV.adapter = handsRvAdapter
                 showTotalsTextView.visibility = View.INVISIBLE
                 runningCountGuessEditText.text.clear()
-                updateHandImages(gameVariables, cardImageArray)
-
                 gameVariables.setColors(-1)
 
                 // This is used to detect if the deck is finished before all the hands
@@ -60,6 +58,10 @@ class GameActivity : AppCompatActivity() {
                     setTotalViewText(showTotalsTextView, gameVariables)
                     showTotalsTextView.visibility = View.VISIBLE
                     handsRvAdapter.revealed = true
+                }
+
+                else {
+                    updateHandImages(gameVariables, cardImageArray)
                 }
             }
 
