@@ -34,20 +34,24 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         holder.runningCount.text = model.handCount.toString()
 
         if (!colorset) {
-            val color = Color.argb(
-                255,
-                Random.nextInt(256),
-                Random.nextInt(256),
-                Random.nextInt(256)
-            )
+            val newColors = mutableListOf<Int>()
 
-            holder.layout.setBackgroundColor(color)
-
-            this.gv.setColors(color)
-
-            if (position == itemCount - 1) {
-                this.colorset = true
+            for (i in 0 until itemCount) {
+                newColors.add(Color.argb(
+                    255,
+                    Random.nextInt(256),
+                    Random.nextInt(256),
+                    Random.nextInt(256)
+                ))
             }
+
+            newColors.forEach {
+                gv.setColors(it)
+            }
+
+            this.colorset = true
+
+            holder.layout.setBackgroundColor(gv.colors[position])
         }
 
         else {
