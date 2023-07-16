@@ -40,6 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/true_count_guess"
         android:autofillHints="Running Count"
         android:inputType="number"
+        android:maxLength="2"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
 
@@ -57,6 +58,7 @@
         app:layout_constraintBottom_toTopOf="@id/show_hand_totals_button"
         android:autofillHints="True Count"
         android:inputType="number"
+        android:maxLength="2"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
 
