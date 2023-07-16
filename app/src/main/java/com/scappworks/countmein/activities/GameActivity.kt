@@ -73,7 +73,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         showHandsTotalButton.setOnClickListener {
-            handsRvAdapter.notifyItemRangeChanged(0, handsRvAdapter.itemCount)
+            handsRvAdapter.notifyDataSetChanged()
 
             if (!gameVariables.checkFinished()) {
                 if (showTotalsTextView.visibility == View.VISIBLE) {

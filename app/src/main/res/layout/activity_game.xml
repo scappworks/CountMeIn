@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:text="@string/placeholder"
         android:visibility="invisible"
+        android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@+id/show_hand_totals_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/next_hand_button"
