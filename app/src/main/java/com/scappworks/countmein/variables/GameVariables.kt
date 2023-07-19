@@ -21,13 +21,14 @@ data class GameVariables(val playerCount:Int, var deckCount:Int) {
         val secondCard = secondCardIn
         var secondCardImage = 0
         // The amount that the hand will contribute to the total running count
-        var handCount = doHandCount(firstCard, secondCard)
+        val handCount = doHandCount(firstCard, secondCard)
 
         // function for updating the count for an individual hand
         private fun doHandCount(cardOne: String, cardTwo: String) : Int {
             var currentCount = 0
             val cardsArray = arrayOf(cardOne, cardTwo)
             val minusArray = arrayOf("10", "jack", "queen", "king", "ace")
+
 
             cardsArray.forEach {
                 for (i in 2..6) {

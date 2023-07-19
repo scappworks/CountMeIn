@@ -91,7 +91,6 @@ class GameActivity : AppCompatActivity() {
         }
 
         updateHandImages(gameVariables, cardImageArray)
-        gameVariables.doDrawHands(cardImageArray)
 
         handsRV.adapter = handsRvAdapter
         handsRV.layoutManager = linearLayoutManager
