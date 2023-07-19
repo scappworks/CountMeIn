@@ -10,7 +10,7 @@
     android:paddingTop="3dp"
     android:paddingBottom="12dp">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/formulas_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,15 +20,25 @@
         app:layout_constraintBottom_toTopOf="@+id/players_text"
         android:background="@color/text_background"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        >
+        app:cardCornerRadius="15dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="@color/text_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent">
+
             <TextView
                 android:id="@+id/welcome"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
                 android:textSize="28sp"
-                android:background="@color/text_background"/>
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:id="@+id/running_count_intro"
@@ -36,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/running_count_formula_intro"
                 android:textSize="18sp"
-                android:background="@color/text_background"/>
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:id="@+id/running_count_formula"
@@ -44,16 +54,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
                 android:textSize="15sp"
-                android:background="@color/text_background"/>
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:id="@+id/true_count_formula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="@string/true_count_intro"
                 android:textSize="18sp"
-                android:background="@color/text_background"/>
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:id="@+id/true_count_example"
@@ -61,10 +70,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/true_count_example"
                 android:textSize="15sp"
-                android:paddingBottom="15sp"
-                android:layout_marginTop="8dp"
-                android:background="@color/text_background"/>
-    </LinearLayout>
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/players_text"
