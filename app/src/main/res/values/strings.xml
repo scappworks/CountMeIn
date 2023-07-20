@@ -26,7 +26,6 @@
     <string name="done">DONE</string>
     <string name="running_and_true_count">Running total: %1$s
         \n
-        \n
         True count: %2$s
     </string>
     <string name="your_guesses">Your guesses:</string>

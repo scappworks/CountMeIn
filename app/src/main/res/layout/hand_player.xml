@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/player_hand_view"
-    android:layout_width="140dp"
-    android:layout_height="150dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:strokeColor="@color/black"
     app:strokeWidth="3dp"
     app:cardCornerRadius="10dp"
@@ -18,8 +18,9 @@
         <ImageView
             android:id="@+id/first_card_image"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="0dp"
             android:src="@drawable/diamonds_ace"
+            android:background="@android:color/transparent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/divider"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,8 +31,9 @@
         <ImageView
             android:id="@+id/second_card_image"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="0dp"
             android:src="@drawable/diamonds_ace"
+            android:background="@android:color/transparent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/divider"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,10 +51,10 @@
 
         <TextView
             android:id="@+id/running_count"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/placeholder"
-            android:textSize="25sp"
+            android:textSize="50sp"
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             app:layout_constraintLeft_toLeftOf="parent"
