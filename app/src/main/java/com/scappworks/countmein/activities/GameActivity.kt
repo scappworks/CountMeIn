@@ -33,8 +33,6 @@ class GameActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val nextHandButton = findViewById<Button>(R.id.next_hand_button)
         val showHandsTotalButton = findViewById<Button>(R.id.show_hand_totals_button)
-        val runningCountGuessEditText = findViewById<EditText>(R.id.running_count_guess)
-        val trueCountGuessEditText = findViewById<EditText>(R.id.true_count_guess)
         val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
         val cardImageArray = resources.getStringArray(R.array.card_images)
 
@@ -48,7 +46,6 @@ class GameActivity : AppCompatActivity() {
                 handsRvAdapter = HandsAdapter(this, handsRvList, gameVariables)
                 handsRV.adapter = handsRvAdapter
                 showTotalsTextView.visibility = View.INVISIBLE
-                runningCountGuessEditText.text.clear()
                 gameVariables.setColors(-1)
 
                 // This is used to detect if the deck is finished before all the hands
