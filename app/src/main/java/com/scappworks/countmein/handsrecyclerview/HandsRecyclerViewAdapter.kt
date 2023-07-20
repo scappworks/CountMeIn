@@ -31,7 +31,16 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         val model: GameVariables.PlayerHand = handsModelList[position]
         holder.firstCardImage.setImageResource(model.firstCardImage)
         holder.secondCardImage.setImageResource(model.secondCardImage)
-        holder.runningCount.text = model.handCount.toString()
+
+        if (!this.gv.checkFinished()) {
+            holder.runningCount.text = model.handCount.toString()
+        }
+
+        else {
+            holder.runningCount.text = "DONE"
+            holder.firstCardImage.visibility = View.INVISIBLE
+            holder.secondCardImage.visibility = View.INVISIBLE
+        }
 
         if (!colorset) {
             val newColors = mutableListOf<Int>()
