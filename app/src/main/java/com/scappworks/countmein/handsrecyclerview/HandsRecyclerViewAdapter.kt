@@ -37,7 +37,7 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         }
 
         else {
-            holder.runningCount.text = "DONE"
+            holder.runningCount.setText(R.string.done)
             holder.firstCardImage.visibility = View.INVISIBLE
             holder.secondCardImage.visibility = View.INVISIBLE
         }

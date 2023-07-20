@@ -23,6 +23,7 @@
     <string name="show_true_count">Show true count: </string>
     <string name="next_hand">Next hand</string>
     <string name="submit">Submit</string>
+    <string name="done">DONE</string>
     <string name="running_and_true_count">Running total: %1$s
         \n
         \n
