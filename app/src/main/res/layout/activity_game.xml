@@ -71,11 +71,13 @@
         app:layout_constraintLeft_toRightOf="@+id/show_totals_guide_left"
         app:layout_constraintRight_toLeftOf="@+id/swipe_instruction_guide_right" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/show_hand_totals_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="1dp"
+        app:cornerRadius="10dp"
+        android:textSize="25sp"
         app:layout_constraintTop_toBottomOf="@+id/show_totals_guide_top"
         app:layout_constraintBottom_toBottomOf="@id/show_totals_guide_bottom"
         app:layout_constraintLeft_toLeftOf="@id/show_totals_guide_left"
@@ -103,12 +105,13 @@
         android:layout_height="0dp"
         app:cornerRadius="10dp"
         android:layout_margin="1dp"
+        android:text="@string/next_hand"
+        android:textSize="25sp"
+        android:backgroundTint="@color/button_background"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/show_totals_guide_bottom"
         app:layout_constraintTop_toBottomOf="@id/show_totals_guide_top"
         app:layout_constraintLeft_toRightOf="@+id/show_totals_guide_right"
-        app:layout_constraintRight_toLeftOf="@id/swipe_instruction_guide_right"
-        android:text="@string/next_hand"
-        android:backgroundTint="@color/button_background"
-        android:textColor="@color/white"/>
+        app:layout_constraintRight_toLeftOf="@id/swipe_instruction_guide_right"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
