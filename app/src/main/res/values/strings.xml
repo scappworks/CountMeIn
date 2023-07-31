@@ -32,6 +32,7 @@
     <string name="placeholder">hold</string>
     <string name="first_card_image">first_card_image</string>
     <string name="second_card_image">second_card_image</string>
+    <string name="swipe_cards_for_next_hand">Swipe cards for next hand</string>
     <string-array name="running_count_formula">
         <item>Start at 0</item>
         <item>2–6 = +1</item>
