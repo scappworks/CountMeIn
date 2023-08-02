@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.65" />
 
     <TextView
         android:id="@+id/swipe_instruction"
@@ -63,7 +63,7 @@
         android:layout_height="0dp"
         android:layout_margin="1dp"
         app:cornerRadius="10dp"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/player_hands_rv_guide_bottom"
         app:layout_constraintBottom_toTopOf="@+id/next_hand_button"
         app:layout_constraintLeft_toRightOf="@+id/show_totals_guide_left"
@@ -92,7 +92,7 @@
         app:cornerRadius="10dp"
         android:layout_margin="1dp"
         android:text="@string/next_hand"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:backgroundTint="@color/button_background"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/show_totals_guide_bottom"
