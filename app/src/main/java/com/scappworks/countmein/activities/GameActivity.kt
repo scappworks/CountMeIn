@@ -1,6 +1,7 @@
 package com.scappworks.countmein.activities
 
 import HandsAdapter
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
 import com.scappworks.countmein.variables.GameVariables
+import kotlin.math.log
+
+private var changeHand = true
+private var previousOrientation = 0
+private lateinit var gameVariablesTrue: GameVariables
 
 class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +32,14 @@ class GameActivity : AppCompatActivity() {
         val playerCount = extras!!.getString("playerCount")!!.toInt()
         val deckCount = extras.getString("deckCount")!!.toInt()
         // Variables for this activity
-        val gameVariables = GameVariables(playerCount, deckCount)
+        val gameVariables = if(changeHand) {
+            gameVariablesTrue = GameVariables(playerCount, deckCount)
+            gameVariablesTrue
+        }
+
+        else {
+            gameVariablesTrue
+        }
         val handsRV = findViewById<RecyclerView>(R.id.player_hands_rv)
         var handsRvList = gameVariables.playerHands
         var handsRvAdapter = HandsAdapter(this, handsRvList, gameVariables)
@@ -36,61 +49,62 @@ class GameActivity : AppCompatActivity() {
         val showTotalsTextView = findViewById<TextView>(R.id.show_totals_box)
         val cardImageArray = resources.getStringArray(R.array.card_images)
 
-        gameVariables.doUpdateRunningCount()
-        setTotalViewText(showTotalsTextView, gameVariables)
+        previousOrientation = resources.configuration.orientation
 
-        nextHandButton.setOnClickListener {
-            if (!gameVariables.checkFinished()) {
-                gameVariables.doDrawHands(cardImageArray)
-                handsRvList = gameVariables.playerHands
-                handsRvAdapter = HandsAdapter(this, handsRvList, gameVariables)
-                handsRV.adapter = handsRvAdapter
-                showTotalsTextView.visibility = View.INVISIBLE
-                gameVariables.setColors(-1)
+        changeHand = previousOrientation == resources.configuration.orientation
 
-                // This is used to detect if the deck is finished before all the hands
-                // have been dealt. It is to push the final state of finished without
-                // having to push any more buttons, and display promptly
-                if (gameVariables.checkFinished()) {
-                    setTotalViewText(showTotalsTextView, gameVariables)
-                    showTotalsTextView.visibility = View.VISIBLE
-                    handsRvAdapter.revealed = true
-                }
+        if (changeHand) {
+            gameVariables.doUpdateRunningCount()
+            setTotalViewText(showTotalsTextView, gameVariables)
 
-                else {
-                    updateHandImages(gameVariables, cardImageArray)
-                }
-            }
-
-            else {
-                showTotalsTextView.visibility = View.VISIBLE
-                handsRvAdapter.revealed = true
-                setTotalViewText(showTotalsTextView, gameVariables)
-            }
-        }
-
-        showHandsTotalButton.setOnClickListener {
-            handsRvAdapter.notifyDataSetChanged()
-
-            if (!gameVariables.checkFinished()) {
-                if (showTotalsTextView.visibility == View.VISIBLE) {
+            nextHandButton.setOnClickListener {
+                if (!gameVariables.checkFinished()) {
+                    gameVariables.doDrawHands(cardImageArray)
+                    handsRvList = gameVariables.playerHands
+                    handsRvAdapter = HandsAdapter(this, handsRvList, gameVariables)
+                    handsRV.adapter = handsRvAdapter
                     showTotalsTextView.visibility = View.INVISIBLE
-                    handsRvAdapter.revealed = false
-                }
+                    gameVariables.setColors(-1)
 
-                else {
+                    // This is used to detect if the deck is finished before all the hands
+                    // have been dealt. It is to push the final state of finished without
+                    // having to push any more buttons, and display promptly
+                    if (gameVariables.checkFinished()) {
+                        setTotalViewText(showTotalsTextView, gameVariables)
+                        showTotalsTextView.visibility = View.VISIBLE
+                        handsRvAdapter.revealed = true
+                    } else {
+                        updateHandImages(gameVariables, cardImageArray)
+                    }
+                } else {
                     showTotalsTextView.visibility = View.VISIBLE
                     handsRvAdapter.revealed = true
+                    setTotalViewText(showTotalsTextView, gameVariables)
                 }
-
-                setTotalViewText(showTotalsTextView, gameVariables)
             }
+
+            showHandsTotalButton.setOnClickListener {
+                handsRvAdapter.notifyDataSetChanged()
+
+                if (!gameVariables.checkFinished()) {
+                    if (showTotalsTextView.visibility == View.VISIBLE) {
+                        showTotalsTextView.visibility = View.INVISIBLE
+                        handsRvAdapter.revealed = false
+                    } else {
+                        showTotalsTextView.visibility = View.VISIBLE
+                        handsRvAdapter.revealed = true
+                    }
+
+                    setTotalViewText(showTotalsTextView, gameVariables)
+                }
+            }
+
+            updateHandImages(gameVariables, cardImageArray)
+
+            handsRV.adapter = handsRvAdapter
+            handsRV.layoutManager = linearLayoutManager
+            changeHand = false
         }
-
-        updateHandImages(gameVariables, cardImageArray)
-
-        handsRV.adapter = handsRvAdapter
-        handsRV.layoutManager = linearLayoutManager
     }
 
     private fun updateHandImages(gameVariables: GameVariables, cardImageArray: Array<String>) {
