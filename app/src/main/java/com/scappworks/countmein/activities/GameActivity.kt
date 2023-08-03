@@ -18,6 +18,7 @@ import com.scappworks.countmein.variables.GameVariables
 import kotlin.math.log
 
 private var changeHand = true
+private var firstRun = true
 private var previousOrientation = 0
 private lateinit var gameVariablesTrue: GameVariables
 
@@ -50,11 +51,14 @@ class GameActivity : AppCompatActivity() {
         val cardImageArray = resources.getStringArray(R.array.card_images)
 
         previousOrientation = resources.configuration.orientation
-
         changeHand = previousOrientation == resources.configuration.orientation
 
         if (changeHand) {
-            gameVariables.doUpdateRunningCount()
+            if (firstRun) {
+                gameVariables.doUpdateRunningCount()
+                firstRun = false
+            }
+
             setTotalViewText(showTotalsTextView, gameVariables)
 
             nextHandButton.setOnClickListener {
