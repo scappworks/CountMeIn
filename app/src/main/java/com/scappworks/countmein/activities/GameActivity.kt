@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.media.tv.TvTrackInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scappworks.countmein.R
 import com.scappworks.countmein.variables.GameVariables
-import kotlin.math.log
 
 private var changeHand = true
 private var firstRun = true
