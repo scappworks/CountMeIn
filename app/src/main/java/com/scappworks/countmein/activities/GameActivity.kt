@@ -2,9 +2,11 @@ package com.scappworks.countmein.activities
 
 import HandsAdapter
 import android.content.res.Configuration
+import android.media.tv.TvTrackInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -142,5 +144,12 @@ class GameActivity : AppCompatActivity() {
         val totalViewString = getString(R.string.running_and_true_count, gv.runningCount.toString(),
             gv.trueCount.toString())
         tvTextView.text = totalViewString
+
+        if (tvTextView.tag == "stb_phone_portrait") {
+            val screenDensity = resources.displayMetrics.density
+            tvTextView.textSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, (45 / screenDensity), resources.displayMetrics
+            )
+        }
     }
 }
