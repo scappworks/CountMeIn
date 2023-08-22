@@ -145,7 +145,43 @@ class GameActivity : AppCompatActivity() {
             gv.trueCount.toString())
         tvTextView.text = totalViewString
 
+        // Set show totals text sizes based on which layout is used
         if (tvTextView.tag == "stb_phone_portrait") {
+            val screenDensity = resources.displayMetrics.density
+            tvTextView.textSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, (45 / screenDensity), resources.displayMetrics
+            )
+        }
+
+        else if (tvTextView.tag == "stb_phone_landscape") {
+            val screenDensity = resources.displayMetrics.density
+            tvTextView.textSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, (35 / screenDensity), resources.displayMetrics
+            )
+        }
+
+        else if (tvTextView.tag == "stb_7-tab_portrait") {
+            val screenDensity = resources.displayMetrics.density
+            tvTextView.textSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, (50 / screenDensity), resources.displayMetrics
+            )
+        }
+
+        else if (tvTextView.tag == "stb_7-tab_landscape") {
+            val screenDensity = resources.displayMetrics.density
+            tvTextView.textSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, (35 / screenDensity), resources.displayMetrics
+            )
+        }
+
+        else if (tvTextView.tag == "stb_10-tab_portrait") {
+            val screenDensity = resources.displayMetrics.density
+            tvTextView.textSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, (60 / screenDensity), resources.displayMetrics
+            )
+        }
+
+        else if (tvTextView.tag == "stb_10-tab_landscape") {
             val screenDensity = resources.displayMetrics.density
             tvTextView.textSize = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP, (45 / screenDensity), resources.displayMetrics
