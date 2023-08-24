@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="12dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/formulas_text_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_guide_left"
+        app:layout_constraintBottom_toTopOf="@+id/players_card"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:orientation="vertical"
+        app:cardCornerRadius="15dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="@color/text_background">
+
+        <LinearLayout
+            android:id="@+id/formulas_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/welcome"
+                android:textSize="28sp"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/running_count_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/running_count_formula_intro"
+                android:textSize="20sp"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/running_count_formula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:textSize="20sp"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/true_count_formula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/true_count_intro"
+                android:textSize="20sp"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/true_count_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/true_count_example"
+                android:textSize="20sp"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/players_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@id/formulas_text_container"
+        app:layout_constraintLeft_toLeftOf="@id/formulas_text_container"
+        app:layout_constraintRight_toLeftOf="@id/deck_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/white"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/players_card_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/text_background">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/players_guide_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/players_text"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/players"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:background="@android:color/transparent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/players_guide_center"/>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/player_spinner_card"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/players_guide_center"
+                app:layout_constraintRight_toRightOf="parent"
+                app:strokeWidth="8dp"
+                app:strokeColor="@color/background"
+                app:cardCornerRadius="8dp"
+                android:background="@android:color/transparent"
+                >
+
+                <Spinner
+                    android:id="@+id/player_spinner"
+                    android:layout_width="90dp"
+                    android:layout_height="48dp"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/deck_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="@id/players_card"
+        app:layout_constraintBottom_toBottomOf="@id/players_card"
+        app:layout_constraintLeft_toRightOf="@+id/players_card"
+        app:layout_constraintRight_toLeftOf="@id/button_guide_left"
+        app:layout_constraintVertical_chainStyle="packed" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/decks_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/text_background" >
+
+            <TextView
+                android:id="@+id/decks_text"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/decks_guide_center"
+                android:text="@string/decks"
+                android:textSize="28sp"
+                android:gravity="center"
+                android:background="@android:color/transparent"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/decks_guide_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/deck_spinner_card"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/decks_guide_center"
+                app:layout_constraintRight_toRightOf="parent"
+                app:strokeWidth="8dp"
+                app:strokeColor="@color/background"
+                app:cardCornerRadius="8dp"
+                android:background="@android:color/transparent" >
+
+                <Spinner
+                    android:id="@+id/deck_spinner"
+                    android:layout_width="90dp"
+                    android:layout_height="48dp"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guide_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guide_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guide_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/play_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/button_guide_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/button_guide_left"
+        app:layout_constraintRight_toRightOf="@id/button_guide_right"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/play"
+        app:cornerRadius="8dp"
+        android:textSize="21sp"
+        android:backgroundTint="@color/button_background"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:id="@+id/app_focus_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        app:layout_constraintLeft_toRightOf="@id/formulas_text_container"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/formulas_text_container"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/app_focus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/deck_card"
+                    app:layout_constraintBottom_toTopOf="@+id/chances"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@string/app_focus"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/chances"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/app_focus"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@string/chances"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
