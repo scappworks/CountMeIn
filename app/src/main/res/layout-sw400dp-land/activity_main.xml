@@ -223,6 +223,21 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
 
+    <TextView
+        android:id="@+id/happy_counting"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/play_button"
+        app:layout_constraintLeft_toLeftOf="@id/play_button"
+        app:layout_constraintRight_toRightOf="@id/play_button"
+        android:text="@string/happy_counting"
+        android:textSize="28sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:flow_wrapMode="aligned"/>
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/play_button"
         android:layout_width="0dp"
@@ -236,53 +251,8 @@
         android:layout_marginBottom="10dp"
         android:text="@string/play"
         app:cornerRadius="8dp"
-        android:textSize="21sp"
+        android:textSize="35sp"
         android:backgroundTint="@color/button_background"
         android:textColor="@color/white"/>
-
-    <LinearLayout
-        android:id="@+id/app_focus_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        app:layout_constraintLeft_toRightOf="@id/formulas_text_container"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/formulas_text_container"
-        android:orientation="vertical" >
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbarSize="8dp" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/app_focus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/deck_card"
-                    app:layout_constraintBottom_toTopOf="@+id/chances"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:text="@string/app_focus"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/chances"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/app_focus"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:text="@string/chances"
-                    android:textSize="18sp"/>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

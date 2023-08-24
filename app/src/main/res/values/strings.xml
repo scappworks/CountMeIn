@@ -11,7 +11,7 @@
     There are several different methods to card counting, but this method is the easiest to start learning.</string>
     <string name="chances">Counting cards increases your chances of winning by 1 to 2 percent,
     and is a fun brain exercise!</string>
-    <string name="happy_counting">Happy counting!</string>
+    <string name="happy_counting">Happy\ncounting!</string>
     <string name="hearts">Hearts</string>
     <string name="spades">Spades</string>
     <string name="clubs">Clubs</string>

@@ -89,7 +89,7 @@
 
     <TextView
         android:id="@+id/show_totals_box"
-        android:tag="stb_phone_portrait"
+        android:tag="stb_phone_smal_portrait"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/placeholder"

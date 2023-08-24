@@ -145,6 +145,20 @@ class GameActivity : AppCompatActivity() {
 
         // Set show totals text sizes based on which layout is used
         when (tvTextView.tag) {
+            "stb_phone_small_portrait" -> {
+                val screenDensity = resources.displayMetrics.density
+                tvTextView.textSize = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_SP, (36 / screenDensity), resources.displayMetrics
+                )
+            }
+
+            "stb_phone__small_landscape" -> {
+                val screenDensity = resources.displayMetrics.density
+                tvTextView.textSize = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_SP, (32 / screenDensity), resources.displayMetrics
+                )
+            }
+
             "stb_phone_portrait" -> {
                 val screenDensity = resources.displayMetrics.density
                 tvTextView.textSize = TypedValue.applyDimension(
