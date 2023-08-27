@@ -5,12 +5,17 @@ import android.content.res.Configuration
 import android.media.tv.TvTrackInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.window.OnBackInvokedCallback
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -109,6 +114,14 @@ class GameActivity : AppCompatActivity() {
             handsRV.layoutManager = linearLayoutManager
             changeHand = false
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        changeHand = true
+        firstRun = true
+        finish()
     }
 
     private fun updateHandImages(gameVariables: GameVariables, cardImageArray: Array<String>) {
