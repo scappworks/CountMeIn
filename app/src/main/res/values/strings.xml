@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CountMeIn</string>
+    <string name="app_name">Count Me In</string>
     <string name="welcome">Welcome!</string>
     <string name="running_count_formula_intro">Running Count formula:</string>
     <string name="true_count_intro">True Count formula: Running Count / Remaining decks</string>4
