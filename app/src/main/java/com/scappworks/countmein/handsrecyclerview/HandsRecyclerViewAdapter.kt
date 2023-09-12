@@ -45,14 +45,13 @@ class HandsAdapter(private val context: Context, handsList: List<GameVariables.P
         if (!colorset) {
             val newColors = mutableListOf<Int>()
 
-            for (i in 0 until itemCount) {
-                newColors.add(Color.argb(
-                    255,
-                    Random.nextInt(256),
-                    Random.nextInt(256),
-                    Random.nextInt(256)
-                ))
-            }
+            newColors.add(Color.parseColor("#002200"))
+            newColors.add(Color.parseColor("#003D00"))
+            newColors.add(Color.parseColor("#005600"))
+            newColors.add(Color.parseColor("#007100"))
+            newColors.add(Color.parseColor("#008C00"))
+            newColors.add(Color.parseColor("#00A800"))
+            newColors.add(Color.parseColor("#00C400"))
 
             newColors.forEach {
                 gv.setColors(it)
